@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.table.DefaultTableModel;
 import models.Producto;
+import services.ProductoService;
 
 public class MainFrame extends javax.swing.JFrame {
 
@@ -15,13 +16,14 @@ public class MainFrame extends javax.swing.JFrame {
     Exit exit;
     String[] header = {"Usuario", "Fecha", "Hora"};
     String[][] data;
-
+    ProductoService ps;
     ProductoController productoController;
     ArrayList<Producto> productos;
 
     public MainFrame() throws IOException {
         initComponents();
         exit = new Exit();
+        ps = new ProductoService();
         inventarioTableModel = new DefaultTableModel(data, header);
 //        inventarioTable.setModel(inventarioTableModel);
 
@@ -225,7 +227,7 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void inventarioButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventarioButtonMousePressed
-        setForm(new Inventario());
+        setForm(new InventarioP(ps));
     }//GEN-LAST:event_inventarioButtonMousePressed
 
     private void gestionInventarioButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gestionInventarioButton1MousePressed

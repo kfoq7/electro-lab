@@ -3,18 +3,57 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package views;
-
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.DocumentEvent;
+import services.InventarioService;
+import models.Inventario;
+import models.Producto;
+import services.ProductoService;
 /**
  *
  * @author kfoqiu7
  */
-public class Inventario extends javax.swing.JPanel {
-    int a;
+
+
+public class InventarioP extends javax.swing.JPanel {
+    ArrayList<Inventario> inventario;
+    ArrayList<Producto> productos;
+    ProductoService is;
     /**
      * Creates new form Inventario
      */
-    public Inventario() {
-        initComponents();
+    public InventarioP(ProductoService productoService) {
+        try {
+            initComponents();
+            is = productoService;
+            productos = is.getProducts();
+            jTextFieldSearch.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    for (Producto producto : productos) {
+                        if (Integer.valueOf(jTextFieldSearch.getText()).equals(producto.getId())) {
+                            LabelOutput.setText(producto.getNombre());
+                        }
+                    }
+                }
+                
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                }
+                
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                }
+            });
+        } catch (IOException ex) {
+            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -31,7 +70,8 @@ public class Inventario extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldSearch = new javax.swing.JTextField();
+        LabelOutput = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(950, 590));
 
@@ -61,8 +101,11 @@ public class Inventario extends javax.swing.JPanel {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consultar.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, 240, 50));
+        jTextFieldSearch.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(jTextFieldSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 240, 50));
+
+        LabelOutput.setText("jLabel3");
+        jPanel1.add(LabelOutput, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 80, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -70,7 +113,7 @@ public class Inventario extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,11 +125,12 @@ public class Inventario extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LabelOutput;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextFieldSearch;
     // End of variables declaration//GEN-END:variables
 }
