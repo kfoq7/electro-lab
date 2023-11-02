@@ -9,7 +9,7 @@ public class InventarioConrtoller {
 
     private InventarioService service;
 
-    public InventarioConrtoller() {
+    public InventarioConrtoller() throws IOException {
         service = new InventarioService();
     }
 
