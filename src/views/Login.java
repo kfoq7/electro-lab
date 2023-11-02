@@ -1,39 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package views;
 
 import controllers.LoginController;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.security.auth.login.LoginContext;
 import javax.swing.JOptionPane;
-import models.Usuario;
 
-/**
- *
- * @author luis
- */
 public class Login extends javax.swing.JFrame {
-    MainFrame init;
-    LoginController login = new LoginController();
-    
-    /**
-     * Creates new form Login
-     */
-    public Login() {
-        try {
-            initComponents();
-            setResizable(false);
-            setLocationRelativeTo(null);
-          
-            init = new MainFrame(this);
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+    private MainFrame mainFrame;
+    private LoginController controller;
+
+    public Login() throws IOException {
+        initComponents();
+
+        mainFrame = new MainFrame();
+
+        controller = new LoginController();
+
+        setResizable(false);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -55,11 +41,11 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         LabelInit = new javax.swing.JLabel();
         LabelPass = new javax.swing.JLabel();
-        jTextFieldUsers = new javax.swing.JTextField();
+        textUsername = new javax.swing.JTextField();
         LabelUSer = new javax.swing.JLabel();
-        jLabelLogin = new javax.swing.JLabel();
-        jLabelRegister = new javax.swing.JLabel();
-        jPasswordField = new javax.swing.JPasswordField();
+        textPassword = new javax.swing.JPasswordField();
+        jPanel1 = new javax.swing.JPanel();
+        loginButton = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(30, 29, 38));
@@ -127,12 +113,12 @@ public class Login extends javax.swing.JFrame {
         LabelPass.setAlignmentY(167.0F);
         jPanel2.add(LabelPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 314, -1, -1));
 
-        jTextFieldUsers.setBackground(new java.awt.Color(30, 29, 38));
-        jTextFieldUsers.setForeground(new java.awt.Color(255, 255, 255));
-        jTextFieldUsers.setAlignmentX(724.0F);
-        jTextFieldUsers.setAlignmentY(218.0F);
-        jTextFieldUsers.setPreferredSize(new java.awt.Dimension(515, 69));
-        jPanel2.add(jTextFieldUsers, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 218, -1, -1));
+        textUsername.setBackground(new java.awt.Color(30, 29, 38));
+        textUsername.setForeground(new java.awt.Color(255, 255, 255));
+        textUsername.setAlignmentX(724.0F);
+        textUsername.setAlignmentY(218.0F);
+        textUsername.setPreferredSize(new java.awt.Dimension(515, 69));
+        jPanel2.add(textUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 218, -1, -1));
 
         LabelUSer.setFont(new java.awt.Font("Noto Sans", 0, 32)); // NOI18N
         LabelUSer.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,28 +127,36 @@ public class Login extends javax.swing.JFrame {
         LabelUSer.setAlignmentY(167.0F);
         jPanel2.add(LabelUSer, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 167, -1, -1));
 
-        jLabelLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Frame 15.png"))); // NOI18N
-        jLabelLogin.setText("jLabel4");
-        jLabelLogin.setPreferredSize(new java.awt.Dimension(178, 56));
-        jLabelLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelLoginMouseClicked(evt);
+        textPassword.setBackground(new java.awt.Color(30, 29, 38));
+        textPassword.setForeground(new java.awt.Color(255, 255, 255));
+        textPassword.setPreferredSize(new java.awt.Dimension(515, 69));
+        jPanel2.add(textPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 365, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(0, 124, 195));
+
+        loginButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        loginButton.setForeground(new java.awt.Color(255, 255, 255));
+        loginButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loginButton.setText("Login");
+        loginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                loginButtonMousePressed(evt);
             }
         });
-        jPanel2.add(jLabelLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 510, -1, -1));
 
-        jLabelRegister.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Frame 16.png"))); // NOI18N
-        jLabelRegister.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabelRegisterMouseClicked(evt);
-            }
-        });
-        jPanel2.add(jLabelRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 510, -1, -1));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+        );
 
-        jPasswordField.setBackground(new java.awt.Color(30, 29, 38));
-        jPasswordField.setForeground(new java.awt.Color(255, 255, 255));
-        jPasswordField.setPreferredSize(new java.awt.Dimension(515, 69));
-        jPanel2.add(jPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(724, 365, -1, -1));
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 490, 230, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,31 +174,21 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabelRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelRegisterMouseClicked
+    private void loginButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMousePressed
+        String username = textUsername.getText();
+        String password = textPassword.getText();
+
         try {
-            String user = JOptionPane.showInputDialog("Ingrese usuario");
-            String password = JOptionPane.showInputDialog("Ingrese contraseña");
-            login.writeFile(user, password);
-        } catch (IOException ex) {
+            controller.login(username, password);
+
+            setVisible(false);
+            mainFrame.setVisible(true);
+        } catch (Exception ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-    }//GEN-LAST:event_jLabelRegisterMouseClicked
+    }//GEN-LAST:event_loginButtonMousePressed
 
-    private void jLabelLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelLoginMouseClicked
-        // TODO add your handling code here:
-        String userName = jTextFieldUsers.getText();
-        String pass = jPasswordField.getText();
-        if (!pass.equals(login.searchUser(userName).getPassword())) {
-            JOptionPane.showMessageDialog(this, "Contraseña incorrecta");
-            return;
-        }
-        init.setVisible(true);
-        
-    }//GEN-LAST:event_jLabelLoginMouseClicked
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -233,7 +217,11 @@ public class Login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                try {
+                    new Login().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -248,11 +236,11 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabelLogin;
-    private javax.swing.JLabel jLabelRegister;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField;
-    private javax.swing.JTextField jTextFieldUsers;
+    private javax.swing.JLabel loginButton;
+    private javax.swing.JPasswordField textPassword;
+    private javax.swing.JTextField textUsername;
     // End of variables declaration//GEN-END:variables
 }
