@@ -1,41 +1,30 @@
 package services;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 import models.Usuario;
 
 public class UsuarioService {
 
-    String pathname = "./database/users.txt";
-    FileReader fr;
-    BufferedReader br;
-    StringTokenizer st;
-    ArrayList<Usuario> usuarios;
+    private final String pathname = "./database/usuario.dat";
+    private ArrayList<Usuario> usuarios;
+    private ObjectInputStream inputStream;
 
-    public UsuarioService() throws IOException {
+    public UsuarioService() throws IOException, ClassNotFoundException {
         usuarios = getUsuarios();
     }
 
-    public ArrayList<Usuario> getUsuarios() throws IOException {
-        ArrayList<Usuario> list = new ArrayList<>();
+    public ArrayList<Usuario> getUsuarios() throws IOException, ClassNotFoundException {
+        ArrayList<Usuario> list;
 
         try {
-            fr = new FileReader(pathname);
-            br = new BufferedReader(fr);
-
-            String line = "";
-
-            while ((line = br.readLine()) != null) {
-                st = new StringTokenizer(line, "|");
-                Usuario user = new Usuario();
-                user.setUser(st.nextToken());
-                user.setPassword(st.nextToken());
-                list.add(user);
-            }
-        } catch (IOException ex) {
+            inputStream = new ObjectInputStream(new FileInputStream(pathname));
+            list = (ArrayList<Usuario>) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException ex) {
             throw ex;
         }
 
@@ -44,12 +33,21 @@ public class UsuarioService {
 
     public Usuario findUserByUsername(String username) throws Exception {
         for (Usuario usuario : usuarios) {
-            if (username.equals(usuario.getUser())) {
+            System.out.println(usuario.getUsername());
+            if (username.equals(usuario.getUsername())) {
                 return usuario;
             }
         }
 
         return null;
+    }
+    
+    public void saveUsers(ArrayList<Usuario> usuarios) {
+         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(pathname))) {
+            outputStream.writeObject(usuarios);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
