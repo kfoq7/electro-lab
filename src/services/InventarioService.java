@@ -1,7 +1,6 @@
 package services;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,14 +10,12 @@ import models.Inventario;
 
 public class InventarioService {
 
-    private String filename = "./database/inventario.txt";
-    private File fl;
+    private final String filename = "./database/inventario.dat";
     private FileReader fr;
     private BufferedReader br;
     private ArrayList<Inventario> inventarios;
 
     public InventarioService() throws IOException {
-        fl = new File(filename);
         inventarios = getInvetarios();
     }
 
@@ -26,7 +23,7 @@ public class InventarioService {
         ArrayList<Inventario> lista = new ArrayList<>();
 
         try {
-            fr = new FileReader(fl);
+            fr = new FileReader(filename);
             br = new BufferedReader(fr);
 
             String linea;

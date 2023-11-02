@@ -8,11 +8,11 @@ public class LoginController {
 
     UsuarioService service;
 
-    public LoginController() throws IOException {
+    public LoginController() throws IOException, ClassNotFoundException {
         service = new UsuarioService();
     }
 
-    public boolean login(String username, String password) throws Exception {
+    public Usuario login(String username, String password) throws Exception {
         Usuario user = service.findUserByUsername(username);
         if (user == null) {
             throw new Exception("Usuario no encontrado");
@@ -22,7 +22,7 @@ public class LoginController {
             throw new Exception("Contraseña incorrecta");
         }
 
-        return true;
+        return user;
     }
 
 }
