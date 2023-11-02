@@ -29,7 +29,7 @@ public class MainFrame extends javax.swing.JFrame {
         productos = productoController.getProducts();
 
         actulizarTable();
-        
+
         setForm(new Home());
 
         setLocationRelativeTo(null);
@@ -303,7 +303,6 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void actulizarTable() {
         for (Producto producto : productos) {
-            System.out.println(producto.getNombre());
             Object[] row = {producto.getId(), producto.getNombre(), producto.getStock()};
             inventarioTableModel.addRow(row);
         }

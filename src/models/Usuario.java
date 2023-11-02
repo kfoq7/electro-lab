@@ -1,14 +1,16 @@
-
 package models;
- 
+
 public class Usuario {
+
+    private int id;
     private String password;
     private String user;
 
     public Usuario() {
     }
 
-    public Usuario(String password, String user) {
+    public Usuario(int id, String password, String user) {
+        this.id = id;
         this.password = password;
         this.user = user;
     }
@@ -28,6 +30,13 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }
