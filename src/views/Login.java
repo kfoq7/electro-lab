@@ -24,17 +24,17 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    public Login() {
-        try {
-            initComponents();
-            setResizable(false);
-            setLocationRelativeTo(null);
-          
-            init = new MainFrame(this);
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    public Login() {
+//        try {
+//            initComponents();
+//            setResizable(false);
+//            setLocationRelativeTo(null);
+//          
+//            init = new MainFrame(this);
+//        } catch (IOException ex) {
+//            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
