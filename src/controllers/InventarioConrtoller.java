@@ -17,7 +17,8 @@ public class InventarioConrtoller {
     FileReader fr;
     BufferedReader br;
     BufferedWriter bw;
-
+   
+    
     public InventarioConrtoller() {
         fl = new File(filename);
     }
