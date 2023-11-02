@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComponent;
 import javax.swing.table.DefaultTableModel;
 import models.Producto;
 
@@ -40,6 +41,10 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         inicioButton = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        inicioButton1 = new javax.swing.JPanel();
+        inventarioButton = new javax.swing.JLabel();
+        inicioButton2 = new javax.swing.JPanel();
+        inventarioButton1 = new javax.swing.JLabel();
         cabezera = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -75,11 +80,61 @@ public class MainFrame extends javax.swing.JFrame {
         inicioButton.setLayout(inicioButtonLayout);
         inicioButtonLayout.setHorizontalGroup(
             inicioButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
         );
         inicioButtonLayout.setVerticalGroup(
             inicioButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+        );
+
+        inicioButton1.setBackground(new java.awt.Color(255, 255, 255));
+
+        inventarioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        inventarioButton.setForeground(new java.awt.Color(50, 59, 65));
+        inventarioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        inventarioButton.setText("Inventario");
+        inventarioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        inventarioButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                inventarioButtonMousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout inicioButton1Layout = new javax.swing.GroupLayout(inicioButton1);
+        inicioButton1.setLayout(inicioButton1Layout);
+        inicioButton1Layout.setHorizontalGroup(
+            inicioButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(inventarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
+        );
+        inicioButton1Layout.setVerticalGroup(
+            inicioButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(inventarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+        );
+
+        inicioButton2.setBackground(new java.awt.Color(255, 255, 255));
+
+        inventarioButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        inventarioButton1.setForeground(new java.awt.Color(50, 59, 65));
+        inventarioButton1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        inventarioButton1.setText("Gestion Inventario");
+        inventarioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        inventarioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                inventarioButton1MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout inicioButton2Layout = new javax.swing.GroupLayout(inicioButton2);
+        inicioButton2.setLayout(inicioButton2Layout);
+        inicioButton2Layout.setHorizontalGroup(
+            inicioButton2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(inventarioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        inicioButton2Layout.setVerticalGroup(
+            inicioButton2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inicioButton2Layout.createSequentialGroup()
+                .addComponent(inventarioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout navegacionLayout = new javax.swing.GroupLayout(navegacion);
@@ -91,6 +146,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(inicioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(inicioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         navegacionLayout.setVerticalGroup(
             navegacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,6 +156,10 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(139, 139, 139)
                 .addComponent(inicioButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(inicioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(inicioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -127,7 +188,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         cabezeraLayout.setVerticalGroup(
             cabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,6 +274,14 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void inventarioButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventarioButtonMousePressed
+        setForm(new Gestion());
+    }//GEN-LAST:event_inventarioButtonMousePressed
+
+    private void inventarioButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventarioButton1MousePressed
+        setForm(new Gestion());
+    }//GEN-LAST:event_inventarioButton1MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -255,6 +324,10 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cabezera;
     private javax.swing.JPanel inicioButton;
+    private javax.swing.JPanel inicioButton1;
+    private javax.swing.JPanel inicioButton2;
+    private javax.swing.JLabel inventarioButton;
+    private javax.swing.JLabel inventarioButton1;
     private javax.swing.JTable inventarioTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -268,6 +341,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel navegacion;
     // End of variables declaration//GEN-END:variables
+
+    private void setForm(JComponent com) {
+        mainPanel.removeAll();
+        mainPanel.add(com);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }
 
     private void actulizarTable() {
         for (Producto producto : productos) {
