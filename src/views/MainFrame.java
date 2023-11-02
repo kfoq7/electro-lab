@@ -1,53 +1,22 @@
 package views;
 
-import controllers.ProductoController;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
-import javax.swing.table.DefaultTableModel;
-import models.Producto;
 
 public class MainFrame extends javax.swing.JFrame {
 
-    DefaultTableModel inventarioTableModel;
+    Exit exit;
 
-    String[] header = {"Usuario", "Fecha", "Hora"};
-    String[][] data;
-
-    ProductoController productoController;
-    ArrayList<Producto> productos;
-
-    public MainFrame() throws IOException {
+    public MainFrame() throws IOException, ClassNotFoundException {
         initComponents();
-
-        inventarioTableModel = new DefaultTableModel(data, header);
-//        inventarioTable.setModel(inventarioTableModel);
-
-        productoController = new ProductoController();
-        productos = productoController.getProducts();
-
-        actulizarTable();
+        exit = new Exit();
 
         setForm(new Home());
 
         setLocationRelativeTo(null);
     }
-//
-//    public MainFrame(Login login) throws IOException {
-//        initComponents();
-//
-//        inventarioTableModel = new DefaultTableModel(data, header);
-////        inventarioTable.setModel(inventarioTableModel);
-//
-//        productoController = new ProductoController();
-//        productos = productoController.getProducts();
-//
-//        actulizarTable();
-//
-//        setLocationRelativeTo(null);
-//    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -59,6 +28,8 @@ public class MainFrame extends javax.swing.JFrame {
         inicioButton = new javax.swing.JLabel();
         inventario = new javax.swing.JPanel();
         inventarioButton = new javax.swing.JLabel();
+        inicioButton3 = new javax.swing.JPanel();
+        gestionInventarioButton2 = new javax.swing.JLabel();
         inicioButton2 = new javax.swing.JPanel();
         gestionInventarioButton1 = new javax.swing.JLabel();
         cabezera = new javax.swing.JPanel();
@@ -68,9 +39,11 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         navegacion.setBackground(new java.awt.Color(30, 29, 38));
         navegacion.setForeground(new java.awt.Color(50, 59, 65));
+        navegacion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(jLabel1.getFont().deriveFont(jLabel1.getFont().getStyle() | java.awt.Font.BOLD, jLabel1.getFont().getSize()+12));
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -78,6 +51,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel1.setText("<html><div style=\"text-align:center\"> LABORATORIO DE ELECTRONICA</div></html");
         jLabel1.setDoubleBuffered(true);
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        navegacion.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 21, 291, 82));
 
         inicio.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -103,6 +77,8 @@ public class MainFrame extends javax.swing.JFrame {
             .addComponent(inicioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
         );
 
+        navegacion.add(inicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, -1, -1));
+
         inventario.setBackground(new java.awt.Color(255, 255, 255));
 
         inventarioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -127,12 +103,42 @@ public class MainFrame extends javax.swing.JFrame {
             .addComponent(inventarioButton, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
         );
 
+        navegacion.add(inventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 309, -1, -1));
+
+        inicioButton3.setBackground(new java.awt.Color(255, 255, 255));
+
+        gestionInventarioButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        gestionInventarioButton2.setForeground(new java.awt.Color(50, 59, 65));
+        gestionInventarioButton2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        gestionInventarioButton2.setText("Gestion Inventario");
+        gestionInventarioButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        gestionInventarioButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                gestionInventarioButton2MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout inicioButton3Layout = new javax.swing.GroupLayout(inicioButton3);
+        inicioButton3.setLayout(inicioButton3Layout);
+        inicioButton3Layout.setHorizontalGroup(
+            inicioButton3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(gestionInventarioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+        );
+        inicioButton3Layout.setVerticalGroup(
+            inicioButton3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inicioButton3Layout.createSequentialGroup()
+                .addComponent(gestionInventarioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        navegacion.add(inicioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 303, -1));
+
         inicioButton2.setBackground(new java.awt.Color(255, 255, 255));
 
         gestionInventarioButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         gestionInventarioButton1.setForeground(new java.awt.Color(50, 59, 65));
         gestionInventarioButton1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        gestionInventarioButton1.setText("Gestion Inventario");
+        gestionInventarioButton1.setText("Cerrar Sesión");
         gestionInventarioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         gestionInventarioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -144,100 +150,91 @@ public class MainFrame extends javax.swing.JFrame {
         inicioButton2.setLayout(inicioButton2Layout);
         inicioButton2Layout.setHorizontalGroup(
             inicioButton2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(gestionInventarioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inicioButton2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(gestionInventarioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         inicioButton2Layout.setVerticalGroup(
             inicioButton2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inicioButton2Layout.createSequentialGroup()
-                .addComponent(gestionInventarioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inicioButton2Layout.createSequentialGroup()
+                .addComponent(gestionInventarioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout navegacionLayout = new javax.swing.GroupLayout(navegacion);
-        navegacion.setLayout(navegacionLayout);
-        navegacionLayout.setHorizontalGroup(
-            navegacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navegacionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(inventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(inicioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(inicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        navegacionLayout.setVerticalGroup(
-            navegacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navegacionLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(127, 127, 127)
-                .addComponent(inicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inventario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(inicioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(265, Short.MAX_VALUE))
-        );
+        navegacion.add(inicioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 303, 60));
+
+        getContentPane().add(navegacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 700));
 
         cabezera.setBackground(new java.awt.Color(17, 5, 89));
-        cabezera.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(248, 250, 252));
         jLabel3.setText("UNIVERSIDAD CESAR VALLEJO");
-        cabezera.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 15, 387, 51));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("29/10/2023");
-        cabezera.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 30, 111, 28));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(248, 250, 252));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setText("PAULINO AQUINO LUIS");
-        cabezera.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(661, 24, 284, 40));
+
+        javax.swing.GroupLayout cabezeraLayout = new javax.swing.GroupLayout(cabezera);
+        cabezera.setLayout(cabezeraLayout);
+        cabezeraLayout.setHorizontalGroup(
+            cabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cabezeraLayout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(94, 94, 94)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        cabezeraLayout.setVerticalGroup(
+            cabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(cabezeraLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(cabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
+        );
+
+        getContentPane().add(cabezera, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 0, 1020, 90));
 
         mainPanel.setEnabled(false);
         mainPanel.setOpaque(false);
         mainPanel.setLayout(new java.awt.BorderLayout());
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(navegacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cabezera, javax.swing.GroupLayout.DEFAULT_SIZE, 1035, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(navegacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(cabezera, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        getContentPane().add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 88, 1020, 610));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void inventarioButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventarioButtonMousePressed
-        setForm(new Gestion());
+        setForm(new InventarioP(ps));
     }//GEN-LAST:event_inventarioButtonMousePressed
 
     private void gestionInventarioButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gestionInventarioButton1MousePressed
-        setForm(new Inventario());
+        exit.setVisible(true);
     }//GEN-LAST:event_gestionInventarioButton1MousePressed
 
     private void inicioButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inicioButtonMousePressed
-        setForm(new Home());
+        try {
+            setForm(new Home());
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_inicioButtonMousePressed
+
+    private void gestionInventarioButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gestionInventarioButton2MousePressed
+        setForm(new Gestion());
+    }//GEN-LAST:event_gestionInventarioButton2MousePressed
 
     /**
      * @param args the command line arguments
@@ -273,6 +270,8 @@ public class MainFrame extends javax.swing.JFrame {
                     new MainFrame().setVisible(true);
                 } catch (IOException ex) {
                     Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -281,9 +280,11 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel cabezera;
     private javax.swing.JLabel gestionInventarioButton1;
+    private javax.swing.JLabel gestionInventarioButton2;
     private javax.swing.JPanel inicio;
     private javax.swing.JLabel inicioButton;
     private javax.swing.JPanel inicioButton2;
+    private javax.swing.JPanel inicioButton3;
     private javax.swing.JPanel inventario;
     private javax.swing.JLabel inventarioButton;
     private javax.swing.JLabel jLabel1;
@@ -299,13 +300,6 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.add(com);
         mainPanel.repaint();
         mainPanel.revalidate();
-    }
-
-    private void actulizarTable() {
-        for (Producto producto : productos) {
-            Object[] row = {producto.getId(), producto.getNombre(), producto.getStock()};
-            inventarioTableModel.addRow(row);
-        }
     }
 
 }

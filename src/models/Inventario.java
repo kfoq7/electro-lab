@@ -5,10 +5,11 @@ import java.util.Date;
 
 public class Inventario {
 
-    int id;
-    Date fechaEntrada;
-    Proveedor proveedor;
-    ArrayList<Producto> productos;
+    private int id;
+    private Date fechaEntrada;
+    private Proveedor proveedor;
+    private ArrayList<Producto> productos;
+    private Usuario usuario;
 
     public Inventario() {
     }
@@ -50,6 +51,14 @@ public class Inventario {
 
     public void setProductos(ArrayList<Producto> productos) {
         this.productos = productos;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }
