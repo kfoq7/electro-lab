@@ -1,16 +1,30 @@
 package views;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.SQLException;
 import javax.swing.JComponent;
+import lib.utils.ErrorHandler;
+import models.User;
 
 public class MainFrame extends javax.swing.JFrame {
 
+    User user;
     Exit exit;
 
-    public MainFrame() throws IOException, ClassNotFoundException {
+    public MainFrame() throws SQLException {
         initComponents();
+
+        exit = new Exit();
+
+        setForm(new Home());
+
+        setLocationRelativeTo(null);
+    }
+
+    public MainFrame(User user) throws SQLException {
+        initComponents();
+
+        this.user = user;
+
         exit = new Exit();
 
         setForm(new Home());
@@ -215,7 +229,7 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void inventarioButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventarioButtonMousePressed
-        setForm(new InventarioP(ps));
+        setForm(new Inventario());
     }//GEN-LAST:event_inventarioButtonMousePressed
 
     private void gestionInventarioButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gestionInventarioButton1MousePressed
@@ -225,10 +239,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void inicioButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inicioButtonMousePressed
         try {
             setForm(new Home());
-        } catch (IOException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            ErrorHandler.formException(ex);
         }
     }//GEN-LAST:event_inicioButtonMousePressed
 
@@ -268,10 +280,8 @@ public class MainFrame extends javax.swing.JFrame {
             public void run() {
                 try {
                     new MainFrame().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    ErrorHandler.formException(ex);
                 }
             }
         });

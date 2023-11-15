@@ -5,12 +5,12 @@ public class Producto {
     private int id;
     private String nombre;
     private int stock;
-    private Proveedor proveedor;
+    private Supplier proveedor;
 
     public Producto() {
     }
 
-    public Producto(int id, String nombre, int stock, Proveedor proveedor) {
+    public Producto(int id, String nombre, int stock, Supplier proveedor) {
         this.id = id;
         this.nombre = nombre;
         this.stock = stock;
@@ -41,11 +41,11 @@ public class Producto {
         this.stock = stock;
     }
 
-    public Proveedor getProveedor() {
+    public Supplier getProveedor() {
         return proveedor;
     }
 
-    public void setProveedor(Proveedor proveedor) {
+    public void setProveedor(Supplier proveedor) {
         this.proveedor = proveedor;
     }
 

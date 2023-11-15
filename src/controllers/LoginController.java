@@ -1,19 +1,19 @@
 package controllers;
 
-import java.io.IOException;
-import models.Usuario;
-import services.UsuarioService;
+import java.sql.SQLException;
+import models.User;
+import services.UserService;
 
 public class LoginController {
 
-    UsuarioService service;
+    UserService service;
 
-    public LoginController() throws IOException, ClassNotFoundException {
-        service = new UsuarioService();
+    public LoginController() throws SQLException {
+        service = new UserService();
     }
 
-    public Usuario login(String username, String password) throws Exception {
-        Usuario user = service.findUserByUsername(username);
+    public User login(String username, String password) throws SQLException, Exception {
+        User user = service.findByUsername(username);
         if (user == null) {
             throw new Exception("Usuario no encontrado");
         }
