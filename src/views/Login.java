@@ -1,27 +1,20 @@
 package views;
 
 import controllers.LoginController;
-import controllers.UsuarioController;
-import java.io.IOException;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import models.Usuario;
+import java.sql.SQLException;
+import lib.utils.ErrorHandler;
+import models.User;
 
 public class Login extends javax.swing.JFrame {
 
+    private User user;
     private MainFrame mainFrame;
     private LoginController loginController;
-    private UsuarioController usuarioController;
 
-    public Login() throws IOException, ClassNotFoundException {
+    public Login() throws SQLException {
         initComponents();
 
-        mainFrame = new MainFrame();
-
         loginController = new LoginController();
-        usuarioController = new UsuarioController();
 
         setResizable(false);
         setLocationRelativeTo(null);
@@ -184,14 +177,13 @@ public class Login extends javax.swing.JFrame {
         String password = textPassword.getText();
 
         try {
-            Usuario usuario = loginController.login(username, password);
-            usuarioController.updateUserFechaEntrada(usuario.getId(), new Date());
+            user = loginController.login(username, password);
 
+            mainFrame = new MainFrame(user);
             mainFrame.setVisible(true);
             dispose();
         } catch (Exception ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, ex.getMessage());
+            ErrorHandler.formException(ex);
         }
     }//GEN-LAST:event_loginButtonMousePressed
 
@@ -225,10 +217,8 @@ public class Login extends javax.swing.JFrame {
             public void run() {
                 try {
                     new Login().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    ErrorHandler.formException(ex);
                 }
             }
         });

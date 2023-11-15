@@ -1,0 +1,57 @@
+package services;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+import models.Producto;
+import models.Supplier;
+
+public class ProductService {
+
+    private String pathname = "./database/producto.txt";
+    private FileReader fr;
+    private BufferedReader br;
+    private ArrayList<Producto> productos;
+
+    public ProductService() throws IOException {
+        productos = getProducts();
+    }
+
+    public ArrayList<Producto> getProducts() throws IOException {
+        ArrayList<Producto> lista = new ArrayList<>();
+
+        try {
+            fr = new FileReader(pathname);
+            br = new BufferedReader(fr);
+
+            String linea;
+
+            while ((linea = br.readLine()) != null) {
+                StringTokenizer st = new StringTokenizer(linea, "|");
+                Producto producto = new Producto();
+                producto.setId(Integer.parseInt(st.nextToken()));
+                producto.setNombre(st.nextToken());
+                producto.setStock(Integer.parseInt(st.nextToken()));
+                producto.setProveedor(new Supplier());
+                lista.add(producto);
+            }
+        } catch (IOException e) {
+            throw e;
+        }
+
+        return lista;
+    }
+
+    public Producto findInventarioById(int id) throws Exception {
+        for (Producto producto : productos) {
+            if (producto.getId() == id) {
+                return producto;
+            }
+        }
+
+        throw new Exception("Invetorio not found");
+    }
+
+}

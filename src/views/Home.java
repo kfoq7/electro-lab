@@ -1,12 +1,11 @@
 package views;
 
-import controllers.InventarioConrtoller;
 import controllers.UsuarioController;
-import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
-import models.Usuario;
-import utils.DateTimeUtility;
+import lib.utils.DateTimeUtility;
+import models.User;
 
 public class Home extends javax.swing.JPanel {
 
@@ -15,27 +14,17 @@ public class Home extends javax.swing.JPanel {
     String[] cabezera = {"Usuario", "Fecha", "Hora"};
     String[][] data;
 
-    InventarioConrtoller controller;
     UsuarioController usuarioController;
 
-    public Home() throws IOException, ClassNotFoundException {
+    public Home() throws SQLException {
         initComponents();
 
         tableModel = new DefaultTableModel(data, cabezera);
         tablaInventario.setModel(tableModel);
 
-        controller = new InventarioConrtoller();
         usuarioController = new UsuarioController();
 
-        for (Usuario usuario : usuarioController.getUsuarios()) {
-            System.out.println(usuario.getNombre());
-            for (Date fecha : usuario.getFechaEntrada()) {
-                String date = DateTimeUtility.getDateFrom(fecha);
-                String time = DateTimeUtility.getTimeFrom(fecha);
-                Object[] row = {usuario.getUsername(), date, time};
-                tableModel.addRow(row);
-            }
-        }
+        updateTable();
     }
 
     @SuppressWarnings("unchecked")
@@ -97,5 +86,16 @@ public class Home extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaInventario;
     // End of variables declaration//GEN-END:variables
+
+    private void updateTable() throws SQLException {
+        for (User usuario : usuarioController.getUsuarios()) {
+            for (Date fecha : usuario.getEntryDates()) {
+                String date = DateTimeUtility.getDateFrom(fecha);
+                String time = DateTimeUtility.getTimeFrom(fecha);
+                Object[] row = {usuario.getUsername(), date, time};
+                tableModel.addRow(row);
+            }
+        }
+    }
 
 }
