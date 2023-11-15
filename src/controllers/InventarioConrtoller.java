@@ -2,18 +2,18 @@ package controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import models.Inventario;
-import services.InventarioService;
+import models.Inventory;
+import services.InventoryService;
 
 public class InventarioConrtoller {
 
-    private InventarioService service;
+    private InventoryService service;
 
     public InventarioConrtoller() throws IOException {
-        service = new InventarioService();
+        service = new InventoryService();
     }
 
-    public ArrayList<Inventario> getInvetarios() throws IOException {
+    public ArrayList<Inventory> getInvetarios() throws IOException {
         return service.getInvetarios();
     }
 

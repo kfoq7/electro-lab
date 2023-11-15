@@ -9,10 +9,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
-import services.InventarioService;
-import models.Inventario;
+import services.InventoryService;
+import models.Inventory;
 import models.Producto;
-import services.ProductoService;
+import services.ProductService;
 /**
  *
  * @author kfoqiu7
@@ -20,13 +20,13 @@ import services.ProductoService;
 
 
 public class InventarioP extends javax.swing.JPanel {
-    ArrayList<Inventario> inventario;
+    ArrayList<Inventory> inventario;
     ArrayList<Producto> productos;
-    ProductoService is;
+    ProductService is;
     /**
      * Creates new form Inventario
      */
-    public InventarioP(ProductoService productoService) {
+    public InventarioP(ProductService productoService) {
         try {
             initComponents();
             is = productoService;
@@ -52,7 +52,7 @@ public class InventarioP extends javax.swing.JPanel {
                 }
             });
         } catch (IOException ex) {
-            Logger.getLogger(Inventario.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Inventory.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

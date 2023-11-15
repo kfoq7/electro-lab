@@ -3,14 +3,14 @@ package controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import models.Producto;
-import services.ProductoService;
+import services.ProductService;
 
 public class ProductoController {
 
-    ProductoService service;
+    ProductService service;
 
     public ProductoController() throws IOException {
-        service = new ProductoService();
+        service = new ProductService();
     }
 
     public ArrayList<Producto> getProducts() throws IOException {

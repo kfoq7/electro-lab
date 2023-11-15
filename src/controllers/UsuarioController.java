@@ -1,32 +1,30 @@
 package controllers;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import models.Usuario;
-import services.UsuarioService;
+import java.sql.SQLException;
+import java.util.List;
+import models.User;
+import services.UserService;
 
 public class UsuarioController {
 
-    UsuarioService service;
+    UserService service;
 
-    public UsuarioController() throws IOException, ClassNotFoundException {
-        service = new UsuarioService();
+    public UsuarioController() {
+        service = new UserService();
     }
 
-    public ArrayList<Usuario> getUsuarios() throws IOException, ClassNotFoundException {
-        return service.getUsuarios();
+    public List<User> getUsuarios() throws SQLException {
+        return service.getAllUsers();
     }
 
-    public void updateUserFechaEntrada(int id, Date fecha) throws IOException, ClassNotFoundException {
-        ArrayList<Usuario> list = service.getUsuarios();
-        for (Usuario usuario : list) {
-            if (usuario.getId() == id) {
-                usuario.setFechaEntrada(fecha);
-            }
-        }
-
-        service.saveUsers(list);
-    }
-
+//    public void updateUserFechaEntrada(int id, Date fecha) throws IOException, ClassNotFoundException {
+//        ArrayList<User> list = service.getUsuarios();
+//        for (User usuario : list) {
+//            if (usuario.getId() == id) {
+//                usuario.setFechaEntrada(fecha);
+//            }
+//        }
+//
+//        service.saveUsers(list);
+//    }
 }
