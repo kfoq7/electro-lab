@@ -14,7 +14,7 @@ public class SQLConnection {
 
     public static Connection getConnection() throws SQLException {
         String connectionURL = baseURL + ";database=" + database;
-        System.out.println(username + " " + password);
+
         try {
             cn = DriverManager.getConnection(connectionURL, username, password);
         } catch (SQLException e) {

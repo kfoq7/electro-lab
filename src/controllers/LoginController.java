@@ -13,16 +13,11 @@ public class LoginController {
     }
 
     public User login(String username, String password) throws SQLException, Exception {
-        User user = service.findByUsername(username);
-        if (user == null) {
-            throw new Exception("Usuario no encontrado");
-        }
-
-        if (!user.getPassword().equals(password)) {
-            throw new Exception("Contraseña incorrecta");
-        }
-
-        return user;
+        return service.validateAuthentication(username, password);
     }
+//    
+//    private boolean validatePassword() {
+//        
+//    }
 
 }

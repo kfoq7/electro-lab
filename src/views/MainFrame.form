@@ -272,12 +272,12 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                   <Component id="jLabel3" min="-2" pref="387" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" pref="111" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel5" min="-2" pref="284" max="-2" attributes="0"/>
+                  <Component id="labelDisplayName" min="-2" pref="284" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -288,7 +288,7 @@
                   <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="jLabel5" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="labelDisplayName" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
@@ -319,7 +319,7 @@
             <Property name="text" type="java.lang.String" value="29/10/2023"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="labelDisplayName">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>

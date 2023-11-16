@@ -24,6 +24,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
 
         this.user = user;
+        labelDisplayName.setText(user.getFullName());
 
         exit = new Exit();
 
@@ -49,7 +50,7 @@ public class MainFrame extends javax.swing.JFrame {
         cabezera = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        labelDisplayName = new javax.swing.JLabel();
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -189,22 +190,22 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("29/10/2023");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(248, 250, 252));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setText("PAULINO AQUINO LUIS");
+        labelDisplayName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        labelDisplayName.setForeground(new java.awt.Color(248, 250, 252));
+        labelDisplayName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelDisplayName.setText("PAULINO AQUINO LUIS");
 
         javax.swing.GroupLayout cabezeraLayout = new javax.swing.GroupLayout(cabezera);
         cabezera.setLayout(cabezeraLayout);
         cabezeraLayout.setHorizontalGroup(
             cabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(cabezeraLayout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addGap(81, 81, 81)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(94, 94, 94)
+                .addGap(102, 102, 102)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelDisplayName, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         cabezeraLayout.setVerticalGroup(
@@ -213,7 +214,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(cabezeraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelDisplayName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
@@ -300,7 +301,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel labelDisplayName;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel navegacion;
     // End of variables declaration//GEN-END:variables
