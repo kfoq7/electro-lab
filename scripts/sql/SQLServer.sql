@@ -1,4 +1,3 @@
-
 CREATE DATABASE SchinchSell
 
 USE ShinchSell
@@ -234,3 +233,59 @@ BEGIN
     -- Insert data into InventoryDetail table
     INSERT INTO InventoryDetail (id_product, id_inventory) VALUES (@ProductId, @InventoryId);
 END;
+GO
+
+CREATE TYPE dbo.ProductIdList AS TABLE
+(
+    ProductId INT
+);
+GO
+
+CREATE PROCEDURE SaveInventoryData
+    @fechaEntrada DATE,
+    @proveedorId INT,
+    @productos dbo.ProductIdList READONLY,
+    @employeeId INT
+AS
+BEGIN
+    -- Declare variables to store individual product IDs
+    DECLARE @ProductId INT;
+
+    -- Create a cursor to loop through the product IDs
+    DECLARE productCursor CURSOR FOR SELECT ProductId FROM @productos;
+
+    -- Open the cursor
+    OPEN productCursor;
+
+    -- Fetch the first product ID
+    FETCH NEXT FROM productCursor INTO @ProductId;
+
+    -- Insert a new record into the Inventory table
+    INSERT INTO Inventory (delivery_day, id_employee)
+    VALUES (@fechaEntrada, @employeeId);
+
+    -- Get the ID of the newly inserted inventory record
+    DECLARE @InventoryId INT;
+    SET @InventoryId = SCOPE_IDENTITY();
+
+    -- Loop through the product IDs
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        -- Your logic to associate each product ID with the inventory
+        -- For example, you might insert into the InventoryDetail table
+
+        INSERT INTO InventoryDetail (id_product, id_inventory)
+        VALUES (@ProductId, @InventoryId);
+
+        -- Fetch the next product ID
+        FETCH NEXT FROM productCursor INTO @ProductId;
+    END;
+
+    -- Close and deallocate the cursor
+    CLOSE productCursor;
+    DEALLOCATE productCursor;
+END;
+	
+
+DROP PROCEDURE SaveInventoryData;
+
