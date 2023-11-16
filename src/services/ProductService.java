@@ -13,7 +13,7 @@ public class ProductService {
     private Connection cn;
     private CallableStatement cs;
     private ResultSet rs;
-    String query;
+    private String query;
 
     public ProductService() {
 
