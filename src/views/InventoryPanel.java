@@ -1,59 +1,43 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package views;
-import java.io.IOException;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
-import services.InventoryService;
 import models.Inventory;
-import models.Producto;
+import models.Product;
 import services.ProductService;
-/**
- *
- * @author kfoqiu7
- */
 
+public class InventoryPanel extends javax.swing.JPanel {
 
-public class InventarioP extends javax.swing.JPanel {
     ArrayList<Inventory> inventario;
-    ArrayList<Producto> productos;
+    ArrayList<Product> productos;
     ProductService is;
-    /**
-     * Creates new form Inventario
-     */
-    public InventarioP(ProductService productoService) {
-        try {
-            initComponents();
-            is = productoService;
-            productos = is.getProducts();
-            jTextFieldSearch.getDocument().addDocumentListener(new DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    for (Producto producto : productos) {
-                        if (Integer.valueOf(jTextFieldSearch.getText()).equals(producto.getId())) {
-                            LabelOutput.setText(producto.getNombre());
-                        }
+
+    public InventoryPanel(ProductService productoService) throws SQLException {
+        initComponents();
+        is = productoService;
+        productos = is.getAllProducts();
+        txtSearch.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                for (Product producto : productos) {
+                    if (Integer.valueOf(txtSearch.getText()).equals(producto.getId())) {
+                        LabelOutput.setText(producto.getName());
                     }
                 }
-                
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-                }
-                
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-                }
-            });
-        } catch (IOException ex) {
-            Logger.getLogger(Inventory.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+        });
     }
 
     /**
@@ -70,7 +54,7 @@ public class InventarioP extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldSearch = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         LabelOutput = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(950, 590));
@@ -101,8 +85,8 @@ public class InventarioP extends javax.swing.JPanel {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/consultar.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, -1, -1));
 
-        jTextFieldSearch.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(jTextFieldSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 240, 50));
+        txtSearch.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 240, 50));
 
         LabelOutput.setText("jLabel3");
         jPanel1.add(LabelOutput, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 80, -1, -1));
@@ -131,6 +115,6 @@ public class InventarioP extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextFieldSearch;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

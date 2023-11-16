@@ -96,7 +96,7 @@ public class User implements Serializable {
     }
     
     public String getFullName() {
-        return firstName + lastName;
+        return firstName + " " + lastName;
     }
 
 }

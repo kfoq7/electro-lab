@@ -8,13 +8,13 @@ public class Inventory {
     private int id;
     private Date fechaEntrada;
     private Supplier proveedor;
-    private ArrayList<Producto> productos;
+    private ArrayList<Product> productos;
     private User usuario;
 
     public Inventory() {
     }
 
-    public Inventory(int id, Date fechaEntrada, Supplier proveedor, ArrayList<Producto> productos) {
+    public Inventory(int id, Date fechaEntrada, Supplier proveedor, ArrayList<Product> productos) {
         this.id = id;
         this.fechaEntrada = fechaEntrada;
         this.proveedor = proveedor;
@@ -45,11 +45,11 @@ public class Inventory {
         this.proveedor = proveedor;
     }
 
-    public ArrayList<Producto> getProductos() {
+    public ArrayList<Product> getProductos() {
         return productos;
     }
 
-    public void setProductos(ArrayList<Producto> productos) {
+    public void setProductos(ArrayList<Product> productos) {
         this.productos = productos;
     }
 

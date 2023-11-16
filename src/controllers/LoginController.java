@@ -12,12 +12,8 @@ public class LoginController {
         service = new UserService();
     }
 
-    public User login(String username, String password) throws SQLException, Exception {
+    public User login(String username, String password) throws SQLException {
         return service.validateAuthentication(username, password);
     }
-//    
-//    private boolean validatePassword() {
-//        
-//    }
 
 }

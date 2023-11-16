@@ -17,6 +17,7 @@ public class UserService {
     private CallableStatement cs;
     private Statement st;
     private ResultSet rs;
+    String query;
 
     public UserService() {
     }
@@ -24,7 +25,6 @@ public class UserService {
     public List<User> getAllUsers() throws SQLException {
         List<User> userList = new ArrayList<>();
         User user;
-        String query;
 
         try {
             cn = SQLConnection.getConnection();
@@ -50,7 +50,6 @@ public class UserService {
 
     public User validateAuthentication(String username, String password) throws SQLException {
         User user = null;
-        String query;
 
         try {
             cn = SQLConnection.getConnection();
@@ -87,7 +86,6 @@ public class UserService {
 
     public User findByUsername(String username) throws SQLException {
         User user = null;
-        String query;
 
         try {
             cn = SQLConnection.getConnection();
@@ -100,8 +98,11 @@ public class UserService {
 
             while (rs.next()) {
                 user = new User();
-                user.setId(rs.getInt(1));
-                user.setUsername(rs.getString(2));
+                user.setId(rs.getInt("id_employee"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setFirstName(rs.getString("name"));
+                user.setLastName(rs.getString("lastname"));
             }
         } catch (SQLException ex) {
             throw ex;
