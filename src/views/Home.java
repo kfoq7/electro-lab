@@ -9,6 +9,8 @@ import models.User;
 
 public class Home extends javax.swing.JPanel {
 
+    User user;
+
     DefaultTableModel tableModel;
 
     String[] cabezera = {"Usuario", "Fecha", "Hora"};

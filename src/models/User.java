@@ -94,5 +94,9 @@ public class User implements Serializable {
     public void setExitDates(Date exitDate) {
         this.exitDates.add(exitDate);
     }
+    
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
 
 }

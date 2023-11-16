@@ -9,12 +9,12 @@ public class Login extends javax.swing.JFrame {
 
     private User user;
     private MainFrame mainFrame;
-    private LoginController loginController;
+    private LoginController controller;
 
     public Login() throws SQLException {
         initComponents();
 
-        loginController = new LoginController();
+        controller = new LoginController();
 
         setResizable(false);
         setLocationRelativeTo(null);
@@ -177,7 +177,7 @@ public class Login extends javax.swing.JFrame {
         String password = textPassword.getText();
 
         try {
-            user = loginController.login(username, password);
+            user = controller.login(username, password);
 
             mainFrame = new MainFrame(user);
             mainFrame.setVisible(true);

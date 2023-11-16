@@ -1,57 +1,70 @@
 package services;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
-import models.Producto;
+import models.Product;
 import models.Supplier;
 
 public class ProductService {
 
-    private String pathname = "./database/producto.txt";
-    private FileReader fr;
-    private BufferedReader br;
-    private ArrayList<Producto> productos;
+    private Connection cn;
+    private CallableStatement cs;
+    private ResultSet rs;
+    String query;
 
-    public ProductService() throws IOException {
-        productos = getProducts();
+    public ProductService() {
+
     }
 
-    public ArrayList<Producto> getProducts() throws IOException {
-        ArrayList<Producto> lista = new ArrayList<>();
+    public ArrayList<Product> getAllProducts() throws SQLException {
+        ArrayList<Product> lista = new ArrayList<>();
+        Product product;
+        Supplier supplier;
 
         try {
-            fr = new FileReader(pathname);
-            br = new BufferedReader(fr);
+            cn = SQLConnection.getConnection();
+            query = "{call getProductsAndSupplier}";
 
-            String linea;
+            cs = cn.prepareCall(query);
+            rs = cs.executeQuery();
 
-            while ((linea = br.readLine()) != null) {
-                StringTokenizer st = new StringTokenizer(linea, "|");
-                Producto producto = new Producto();
-                producto.setId(Integer.parseInt(st.nextToken()));
-                producto.setNombre(st.nextToken());
-                producto.setStock(Integer.parseInt(st.nextToken()));
-                producto.setProveedor(new Supplier());
-                lista.add(producto);
+            while (rs.next()) {
+                product = new Product();
+                product.setId(rs.getInt("id_producto"));
+                product.setName(rs.getString("name_product"));
+                product.setStock(rs.getInt("stock"));
+                supplier = new Supplier();
+                supplier.setId(rs.getInt("id_supplier"));
+                supplier.setName(rs.getString("supplier_name"));
+                product.setSupplier(supplier);
             }
-        } catch (IOException e) {
-            throw e;
+        } catch (SQLException ex) {
+            throw ex;
+        } finally {
+            cn.close();
         }
 
         return lista;
     }
 
-    public Producto findInventarioById(int id) throws Exception {
-        for (Producto producto : productos) {
-            if (producto.getId() == id) {
-                return producto;
-            }
-        }
+    public void createProduct(Product product) throws SQLException {
+        String query;
 
-        throw new Exception("Invetorio not found");
+        try {
+            cn = SQLConnection.getConnection();
+            query = "{call (?, ?, ?, ?, ?, ?)}";
+
+            cs = cn.prepareCall(query);
+            cs.setInt(1, product.getId());
+//            cs.set
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            cn.close();
+        }
     }
 
 }

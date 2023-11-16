@@ -30,47 +30,30 @@ public class NewMain {
     public static void main(String[] args) throws IOException, SQLException {
         String user = System.getProperty("USER");
         String password = System.getProperty("PASSWORD");
-        System.out.println(user + " " + password);
 
-        Connection cn = SQLConnection.getConnection();
-        String selectQuery = "SELECT * FROM [dbo].[User]";
-        Statement st = cn.createStatement();
-        ResultSet rs = st.executeQuery(selectQuery);
-
-        while (rs.next()) {
-            System.out.println(rs.getString(1) + " " + rs.getString(2));
-        }
-
-//        ArrayList<Usuario> list = new ArrayList<>();
-//        Usuario user1 = new Usuario(1, "password123", "luis", "luis", "paulino", "mañana");
-//        Usuario user2 = new Usuario(2, "password123", "luis", "luis", "paulino", "mañana");
-//        list.add(user1);
-//        list.add(user2);
-////        saveUsersToFile(list, "./database/usuario.dat");
-//        list = loadUsersFromFile("./database/usuario.dat");
-//        for (Usuario usera : list) {
-//            System.out.println(usera.getId() + " " + usera.getNombre() + " ");
-//            for (Date currentdate : usera.getFechaEntrada()) {
-//                System.out.println(currentdate);
-//            }
+//        Connection cn = SQLConnection.getConnection();
+//        String selectQuery = "SELECT * FROM [dbo].[User]";
+//        Statement st = cn.createStatement();
+//        ResultSet rs = st.executeQuery(selectQuery);
+//
+//        while (rs.next()) {
+//            System.out.println(rs.getString(1) + " " + rs.getString(2));
 //        }
+        UserService userService = new UserService();
+        userService.validateAuthentication("Admin", "1234");
     }
 
-    private static void saveUsersToFile(ArrayList<User> users, String filePath) {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(filePath))) {
-            outputStream.writeObject(users);
-        } catch (IOException e) {
-            e.printStackTrace();
+    // User service
+    public class TestingUserServices {
+
+        UserService service;
+
+        public TestingUserServices() {
+            service = new UserService();
         }
-    }
 
-    private static ArrayList<User> loadUsersFromFile(String filePath) throws FileNotFoundException, IOException {
-        try {
-            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(filePath));
-            return (ArrayList<User>) inputStream.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            // If the file doesn't exist, return an empty list
-            return new ArrayList<>();
+        public void getUserAuth() throws SQLException {
+            service.validateAuthentication("Admin", "1234");
         }
     }
 
