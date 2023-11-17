@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class SQLConnection {
 
     private static Connection cn;
-    private final static String database = "ShinchSell;";
+    private final static String database = "LaboratorioInventario;";
     private final static String username = System.getProperty("USER");
     private final static String password = System.getProperty("PASSWORD");
     private final static String baseURL = "jdbc:sqlserver://localhost:1433;trustServerCertificate=true";

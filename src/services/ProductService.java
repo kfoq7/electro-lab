@@ -33,13 +33,14 @@ public class ProductService {
 
             while (rs.next()) {
                 product = new Product();
-                product.setId(rs.getInt("id_producto"));
+                product.setId(rs.getInt("id_product"));
                 product.setName(rs.getString("name_product"));
                 product.setStock(rs.getInt("stock"));
                 supplier = new Supplier();
                 supplier.setId(rs.getInt("id_supplier"));
                 supplier.setName(rs.getString("supplier_name"));
                 product.setSupplier(supplier);
+                lista.add(product);
             }
         } catch (SQLException ex) {
             throw ex;
