@@ -2,7 +2,11 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Inventory {
 
     private int id;
@@ -19,46 +23,6 @@ public class Inventory {
         this.fechaEntrada = fechaEntrada;
         this.proveedor = proveedor;
         this.productos = productos;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Date getFechaEntrada() {
-        return fechaEntrada;
-    }
-
-    public void setFechaEntrada(Date fechaEntrada) {
-        this.fechaEntrada = fechaEntrada;
-    }
-
-    public Supplier getProveedor() {
-        return proveedor;
-    }
-
-    public void setProveedor(Supplier proveedor) {
-        this.proveedor = proveedor;
-    }
-
-    public ArrayList<Product> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(ArrayList<Product> productos) {
-        this.productos = productos;
-    }
-
-    public User getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(User usuario) {
-        this.usuario = usuario;
     }
 
 }
