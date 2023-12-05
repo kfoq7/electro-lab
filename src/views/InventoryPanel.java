@@ -14,9 +14,9 @@ public class InventoryPanel extends javax.swing.JPanel {
     ArrayList<Product> productos;
     ProductService is;
 
-    public InventoryPanel(ProductService productoService) throws SQLException {
+    public InventoryPanel() throws SQLException {
         initComponents();
-        is = productoService;
+        is = new ProductService();
         productos = is.getAllProducts();
         txtSearch.getDocument().addDocumentListener(new DocumentListener() {
             @Override

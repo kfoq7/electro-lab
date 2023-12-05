@@ -28,7 +28,7 @@ public class UserService {
 
         try {
             cn = SQLConnection.getConnection();
-            query = "SELECT * FROM [dbo].[User]";
+            query = "SELECT * FROM Employee";
 
             st = cn.createStatement();
             rs = st.executeQuery(query);

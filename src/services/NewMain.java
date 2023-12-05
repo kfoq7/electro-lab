@@ -24,23 +24,21 @@ import models.User;
  */
 public class NewMain {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) throws IOException, SQLException {
         String user = System.getProperty("USER");
         String password = System.getProperty("PASSWORD");
+//        System.out.println(user + " " + password);
 
-//        Connection cn = SQLConnection.getConnection();
-//        String selectQuery = "SELECT * FROM [dbo].[User]";
-//        Statement st = cn.createStatement();
-//        ResultSet rs = st.executeQuery(selectQuery);
-//
-//        while (rs.next()) {
-//            System.out.println(rs.getString(1) + " " + rs.getString(2));
-//        }
-        UserService userService = new UserService();
-        userService.validateAuthentication("Admin", "1234");
+        Connection cn = SQLConnection.getConnection();
+        String selectQuery = "SELECT * FROM Employee";
+        Statement st = cn.createStatement();
+        ResultSet rs = st.executeQuery(selectQuery);
+
+        while (rs.next()) {
+            System.out.println(rs.getString(1) + "|" + rs.getString(2));
+        }
+//        UserService userService = new UserService();
+//        userService.validateAuthentication("Admin", "1234");
     }
 
     // User service

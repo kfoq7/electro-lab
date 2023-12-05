@@ -236,7 +236,11 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void inventarioButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventarioButtonMousePressed
-        setForm(new Inventario());
+        try {
+            setForm(new InventoryPanel());
+        } catch (SQLException ex) {
+            ErrorHandler.formException(ex);
+        }
     }//GEN-LAST:event_inventarioButtonMousePressed
 
     private void gestionInventarioButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gestionInventarioButton1MousePressed
@@ -252,7 +256,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_inicioButtonMousePressed
 
     private void gestionInventarioButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gestionInventarioButton2MousePressed
-        setForm(new Gestion());
+        try {
+            setForm(new Gestion(user));
+        } catch (SQLException ex) {
+            ErrorHandler.formException(ex);
+        }
     }//GEN-LAST:event_gestionInventarioButton2MousePressed
 
     public static void main(String args[]) {
