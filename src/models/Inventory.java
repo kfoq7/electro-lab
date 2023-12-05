@@ -3,14 +3,10 @@ package models;
 import java.util.ArrayList;
 import java.util.Date;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 @AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class Inventory {
 
     private int id;
