@@ -1,52 +1,29 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.NoArgsConstructor;
+import lombok.Data;
+
+@NoArgsConstructor
+@Data
 public class Product {
 
+    @JsonProperty("id")
     private int id;
+    
+    @JsonProperty("name_product")
     private String name;
+    
+    @JsonProperty("unique_stock")
     private int stock;
-    private Supplier supplier;
+    
+    
+    @JsonProperty("supplier")
+    private int supplierId;
 
-    public Product() {
-    }
-
-    public Product(int id, String name, int stock, Supplier supplier) {
-        this.id = id;
-        this.name = name;
-        this.stock = stock;
-        this.supplier = supplier;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    public Supplier getSupplier() {
-        return supplier;
-    }
-
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
+    @Override
+    public String toString() {
+        return id + ": " + name;
     }
 
 }

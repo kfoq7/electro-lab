@@ -4,41 +4,54 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
 import models.Inventory;
 import models.Product;
 import services.ProductService;
 
 public class InventoryPanel extends javax.swing.JPanel {
-
-    ArrayList<Inventory> inventario;
-    ArrayList<Product> productos;
-    ProductService is;
+    //Estoy trabajando con el arraylist, todo deberia ser incluido aqui para que funcion
+    ArrayList<Product> Productos = new ArrayList<>();
 
     public InventoryPanel() throws SQLException {
         initComponents();
-        is = new ProductService();
-        productos = is.getAllProducts();
+        //Creando header para table
+        String[] header = {"id", "nombre", "stock", "proveedor"};
+        DefaultTableModel tableModel = new DefaultTableModel(header, 0);
+        for (Product Producto : Productos) {
+            String[] row = {String.valueOf(Producto.getId()), Producto.getName(), String.valueOf(Producto.getStock()), Producto.getSupplier().getName()};
+            tableModel.addRow(row);
+        }
+        jTable1.setModel(tableModel);
         txtSearch.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                for (Product producto : productos) {
-                    if (Integer.valueOf(txtSearch.getText()).equals(producto.getId())) {
-                        LabelOutput.setText(producto.getName());
-                    }
-                }
+                search();
             }
-
             @Override
             public void removeUpdate(DocumentEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                search();
             }
-
             @Override
             public void changedUpdate(DocumentEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+                search();
+            }
+            private void search() {
+                String text = txtSearch.getText();
+                ArrayList<Product> searchResults = new ArrayList<>();
+                for (Product product : Productos) {
+                    if (product.getName().toLowerCase().contains(text.toLowerCase())) {
+                        searchResults.add(product);
+                    }
+                }
+                tableModel.setRowCount(0);
+                for (Product Producto : searchResults) {
+                    tableModel.addRow(new Object[]{String.valueOf(Producto.getId()), Producto.getName(), String.valueOf(Producto.getStock()), Producto.getSupplier().getName()});
+                }
             }
         });
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
