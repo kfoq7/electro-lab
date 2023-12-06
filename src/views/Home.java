@@ -2,9 +2,7 @@ package views;
 
 import controllers.UsuarioController;
 import java.sql.SQLException;
-import java.util.Date;
 import javax.swing.table.DefaultTableModel;
-import lib.utils.DateTimeUtility;
 import models.User;
 
 public class Home extends javax.swing.JPanel {
@@ -26,7 +24,7 @@ public class Home extends javax.swing.JPanel {
 
         usuarioController = new UsuarioController();
 
-        updateTable();
+//        updateTable();
     }
 
     @SuppressWarnings("unchecked")
@@ -89,15 +87,15 @@ public class Home extends javax.swing.JPanel {
     private javax.swing.JTable tablaInventario;
     // End of variables declaration//GEN-END:variables
 
-    private void updateTable() throws SQLException {
-        for (User usuario : usuarioController.getUsuarios()) {
-            for (Date fecha : usuario.getEntryDates()) {
-                String date = DateTimeUtility.getDateFrom(fecha);
-                String time = DateTimeUtility.getTimeFrom(fecha);
-                Object[] row = {usuario.getUsername(), date, time};
-                tableModel.addRow(row);
-            }
-        }
-    }
+//    private void updateTable() throws SQLException {
+//        for (User usuario : usuarioController.getUsuarios()) {
+//            for (Date fecha : usuario.getEntryDates()) {
+//                String date = DateTimeUtility.getDateFrom(fecha);
+//                String time = DateTimeUtility.getTimeFrom(fecha);
+//                Object[] row = {usuario.getUsername(), date, time};
+//                tableModel.addRow(row);
+//            }
+//        }
+//    }
 
 }

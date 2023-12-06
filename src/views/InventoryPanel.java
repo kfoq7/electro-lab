@@ -1,5 +1,7 @@
 package views;
 
+import controllers.InventarioConrtoller;
+import controllers.ProductController;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.event.DocumentListener;
@@ -7,51 +9,46 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import models.Inventory;
 import models.Product;
-import services.ProductService;
 
 public class InventoryPanel extends javax.swing.JPanel {
-    //Estoy trabajando con el arraylist, todo deberia ser incluido aqui para que funcion
-    ArrayList<Product> Productos = new ArrayList<>();
 
-    public InventoryPanel() throws SQLException {
+    DefaultTableModel tableModel;
+
+    ArrayList<Product> products;
+
+    String[] header = {"id", "nombre", "stock", "proveedor"};
+
+//    InventarioConrtoller controller;
+    ProductController controller;
+
+    public InventoryPanel() throws Exception {
         initComponents();
-        //Creando header para table
-        String[] header = {"id", "nombre", "stock", "proveedor"};
-        DefaultTableModel tableModel = new DefaultTableModel(header, 0);
-        for (Product Producto : Productos) {
-            String[] row = {String.valueOf(Producto.getId()), Producto.getName(), String.valueOf(Producto.getStock()), Producto.getSupplier().getName()};
-            tableModel.addRow(row);
-        }
-        jTable1.setModel(tableModel);
+
+        controller = new ProductController();
+
+        products = controller.getProducts();
+
+        tableModel = new DefaultTableModel(header, 0);
+        tableInventory.setModel(tableModel);
+        updateTable();
+
         txtSearch.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                search();
+                filter();
             }
+
             @Override
             public void removeUpdate(DocumentEvent e) {
-                search();
+                filter();
             }
+
             @Override
             public void changedUpdate(DocumentEvent e) {
-                search();
-            }
-            private void search() {
-                String text = txtSearch.getText();
-                ArrayList<Product> searchResults = new ArrayList<>();
-                for (Product product : Productos) {
-                    if (product.getName().toLowerCase().contains(text.toLowerCase())) {
-                        searchResults.add(product);
-                    }
-                }
-                tableModel.setRowCount(0);
-                for (Product Producto : searchResults) {
-                    tableModel.addRow(new Object[]{String.valueOf(Producto.getId()), Producto.getName(), String.valueOf(Producto.getStock()), Producto.getSupplier().getName()});
-                }
+                filter();
             }
         });
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,7 +61,7 @@ public class InventoryPanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableInventory = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
@@ -75,7 +72,7 @@ public class InventoryPanel extends javax.swing.JPanel {
         jPanel1.setPreferredSize(new java.awt.Dimension(950, 590));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableInventory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -86,7 +83,7 @@ public class InventoryPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableInventory);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 930, 420));
 
@@ -127,7 +124,35 @@ public class InventoryPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableInventory;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+
+    private void updateTable() {
+        for (Product product : products) {
+            Object[] row = {product.getId(), product.getName(), product.getStock(), product.getSupplierId()};
+//            tableModel.addRow(row);
+        }
+    }
+
+    private void updateTable(ArrayList<Product> productList) {
+        for (Product product : productList) {
+            Object[] row = {product.getId(), product.getName(), product.getStock(), product.getSupplierId()};
+            tableModel.addRow(row);
+        }
+    }
+
+    private void filter() {
+        String text = txtSearch.getText();
+        ArrayList<Product> filteredProducts = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getName().toLowerCase().contains(text.toLowerCase())) {
+                filteredProducts.add(product);
+            }
+        }
+
+        tableModel.setRowCount(0);
+        updateTable(filteredProducts);
+    }
+
 }

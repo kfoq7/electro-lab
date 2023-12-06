@@ -1,7 +1,5 @@
 package services;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -12,23 +10,25 @@ import java.util.ArrayList;
 
 public class Fetch<T> {
 
-    private final String api = "http://127.0.0.1:8000/api/";
+    private final String api = "http://127.0.0.1:8000/api";
     private String URL;
     private String endpoint;
     private ArrayList<T> objectList;
     private HttpClient client;
-    private ObjectMapper objectMapper;
     private HttpRequest request;
     private HttpResponse<String> response;
+    private JSONParser<T> jsonParser;
+    private Class<T> objectType;
 
-    public Fetch() {
+    public Fetch(Class<T> objectType) {
         client = HttpClient.newBuilder().build();
-        objectMapper = new ObjectMapper();
+        jsonParser = new JSONParser<T>();
+        this.objectType = objectType;
     }
 
     public Fetch(String endpoint) {
         client = HttpClient.newBuilder().build();
-        objectMapper = new ObjectMapper();
+        jsonParser = new JSONParser<>();
         this.endpoint = endpoint;
     }
 
@@ -36,11 +36,9 @@ public class Fetch<T> {
         try {
             setGetRequest();
             response = sendRequest();
+            System.out.println(response.body());
 
-            objectList = objectMapper.readValue(
-                    response.body(),
-                    new TypeReference<ArrayList<T>>() {
-            });
+            objectList = jsonParser.parserList(response.body(), objectType);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -59,10 +57,10 @@ public class Fetch<T> {
     }
 
     public void post(T object) {
-        String stringify;
+        String jsonString;
 
         try {
-            stringify = objectToString(object);
+            jsonString = objectToString(object);
             setPostRequest(stringify);
             response = sendRequest();
             System.out.println("Response code: " + response.statusCode());
@@ -71,27 +69,24 @@ public class Fetch<T> {
         }
     }
 
-    private String objectToString(T object) throws Exception {
-        return objectMapper.writeValueAsString(object);
-    }
-
     private HttpResponse<String> sendRequest() throws Exception {
         return client.send(request, BodyHandlers.ofString());
     }
 
     private void setGetRequest() {
         request = HttpRequest.newBuilder()
-                .uri(URI.create(api + URL))
+                .uri(URI.create(api + endpoint))
                 .setHeader("Content-Type", "application/json")
                 .build();
     }
 
     private void setPostRequest(String requestBody) {
         request = HttpRequest.newBuilder()
-                .uri((URI.create(api + URL)))
+                .uri((URI.create(api + endpoint)))
                 .setHeader("Content-Type", "application/json")
                 .POST(BodyPublishers.ofString(requestBody))
                 .build();
     }
 
+//    private List<T> 
 }

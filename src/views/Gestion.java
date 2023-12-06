@@ -29,7 +29,7 @@ public class Gestion extends javax.swing.JPanel {
     InventarioConrtoller inventoryController;
     SupplierController supplierController;
 
-    public Gestion(User user) throws SQLException {
+    public Gestion(User user) throws Exception {
         initComponents();
 
         this.user = user;
@@ -170,7 +170,7 @@ public class Gestion extends javax.swing.JPanel {
         tableProduct.setModel(tableProductModel);
     }
 
-    private void loadProductTable() throws SQLException {
+    private void loadProductTable() throws Exception {
         ArrayList<Product> productList = productController.getProducts();
 
         for (Product product : productList) {

@@ -2,10 +2,10 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Date;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class Inventory {
 

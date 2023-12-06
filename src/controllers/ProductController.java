@@ -13,7 +13,7 @@ public class ProductController {
         service = new ProductService();
     }
 
-    public ArrayList<Product> getProducts() throws SQLException {
+    public ArrayList<Product> getProducts() throws Exception {
         return service.getAllProducts();
     }
 

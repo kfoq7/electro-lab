@@ -10,14 +10,13 @@ public class Product {
 
     @JsonProperty("id")
     private int id;
-    
+
     @JsonProperty("name_product")
     private String name;
-    
+
     @JsonProperty("unique_stock")
     private int stock;
-    
-    
+
     @JsonProperty("supplier")
     private int supplierId;
 
