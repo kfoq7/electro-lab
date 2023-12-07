@@ -131,7 +131,7 @@ public class InventoryPanel extends javax.swing.JPanel {
     private void updateTable() {
         for (Product product : products) {
             Object[] row = {product.getId(), product.getName(), product.getStock(), product.getSupplierId()};
-//            tableModel.addRow(row);
+            tableModel.addRow(row);
         }
     }
 

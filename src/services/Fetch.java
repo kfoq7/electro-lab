@@ -11,34 +11,32 @@ import java.util.ArrayList;
 public class Fetch<T> {
 
     private final String api = "http://127.0.0.1:8000/api";
-    private String URL;
     private String endpoint;
     private ArrayList<T> objectList;
     private HttpClient client;
     private HttpRequest request;
     private HttpResponse<String> response;
     private JSONParser<T> jsonParser;
-    private Class<T> objectType;
 
     public Fetch(Class<T> objectType) {
         client = HttpClient.newBuilder().build();
-        jsonParser = new JSONParser<T>();
-        this.objectType = objectType;
+        jsonParser = new JSONParser<>(objectType);
     }
 
-    public Fetch(String endpoint) {
-        client = HttpClient.newBuilder().build();
-        jsonParser = new JSONParser<>();
+    public Fetch(String endpoint, Class<T> objectType) {
         this.endpoint = endpoint;
+
+        client = HttpClient.newBuilder().build();
+        jsonParser = new JSONParser<>(objectType);
     }
 
     public ArrayList<T> get() {
         try {
             setGetRequest();
             response = sendRequest();
-            System.out.println(response.body());
+//            System.out.println(response.body());
 
-            objectList = jsonParser.parserList(response.body(), objectType);
+            objectList = jsonParser.parserList(response.body());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -60,8 +58,8 @@ public class Fetch<T> {
         String jsonString;
 
         try {
-            jsonString = objectToString(object);
-            setPostRequest(stringify);
+            jsonString = jsonParser.stringify(object);
+            setPostRequest(jsonString);
             response = sendRequest();
             System.out.println("Response code: " + response.statusCode());
         } catch (Exception ex) {
@@ -88,5 +86,4 @@ public class Fetch<T> {
                 .build();
     }
 
-//    private List<T> 
 }

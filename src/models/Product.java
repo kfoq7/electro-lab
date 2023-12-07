@@ -1,6 +1,6 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
@@ -8,16 +8,16 @@ import lombok.Data;
 @Data
 public class Product {
 
-    @JsonProperty("id")
+    @SerializedName(value = "id", alternate = "product_id")
     private int id;
 
-    @JsonProperty("name_product")
+    @SerializedName(value = "name_product", alternate = "name")
     private String name;
 
-    @JsonProperty("unique_stock")
+    @SerializedName(value = "unique_stock", alternate = "stock")
     private int stock;
 
-    @JsonProperty("supplier")
+    @SerializedName(value = "supplier", alternate = "supplier_id")
     private int supplierId;
 
     @Override

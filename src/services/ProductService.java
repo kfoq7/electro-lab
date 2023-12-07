@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import models.Product;
-import models.Supplier;
 
 public class ProductService {
 
@@ -17,7 +16,7 @@ public class ProductService {
     private String query;
 
     public ProductService() {
-        fetch = new Fetch<>("/managament/product/");
+        fetch = new Fetch<>("/managament/product/", Product.class);
     }
 
     public ArrayList<Product> getAllProducts() throws Exception {

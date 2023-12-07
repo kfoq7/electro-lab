@@ -1,16 +1,18 @@
 package services;
 
+import com.google.gson.internal.$Gson$Types;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class JSONParser<T> {
 
     private Gson parser;
+    private Class<T> objectType;
 
-    public JSONParser() {
+    public JSONParser(Class<T> objectType) {
         parser = new Gson();
+        this.objectType = objectType;
     }
 
     public String stringify(T object) {
@@ -31,19 +33,19 @@ public class JSONParser<T> {
         }
     }
 
-    public T parser(String json, Class<T> objectType) {
+    public T parser(String json) {
         try {
             return parser.fromJson(json, objectType);
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
-
     }
 
-    public ArrayList<T> parserList(String json, Class<T> objectType) {
+    public ArrayList<T> parserList(String json) {
         try {
-            Type type = TypeToken.getParameterized(ArrayList.class, objectType).getType();
+            Type type = $Gson$Types.newParameterizedTypeWithOwner(null, ArrayList.class, objectType);
+
             return parser.fromJson(json, type);
         } catch (Exception ex) {
             ex.printStackTrace();

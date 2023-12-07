@@ -258,7 +258,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void gestionInventarioButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gestionInventarioButton2MousePressed
         try {
             setForm(new Gestion(user));
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ErrorHandler.formException(ex);
         }
     }//GEN-LAST:event_gestionInventarioButton2MousePressed
