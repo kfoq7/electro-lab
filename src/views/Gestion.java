@@ -204,7 +204,7 @@ public class Gestion extends javax.swing.JPanel {
         return null;
     }
 
-    private void loadSupplier() throws SQLException {
+    private void loadSupplier() throws Exception {
         supplierList = supplierController.getSuppliers();
 
         for (Supplier supplier : supplierList) {

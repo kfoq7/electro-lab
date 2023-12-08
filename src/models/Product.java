@@ -8,17 +8,17 @@ import lombok.Data;
 @Data
 public class Product {
 
-    @SerializedName(value = "id", alternate = "product_id")
+    @SerializedName("id")
     private int id;
 
-    @SerializedName(value = "name_product", alternate = "name")
+    @SerializedName("name_product")
     private String name;
 
-    @SerializedName(value = "unique_stock", alternate = "stock")
+    @SerializedName("unique_stock")
     private int stock;
 
-    @SerializedName(value = "supplier", alternate = "supplier_id")
-    private int supplierId;
+    @SerializedName("supplier")
+    private Supplier supplier;
 
     @Override
     public String toString() {

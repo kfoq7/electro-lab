@@ -1,5 +1,6 @@
 package models;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 
@@ -7,11 +8,19 @@ import lombok.Data;
 @Data
 public class Supplier {
 
+    @SerializedName("id")
     private int id;
-    private String name;
-    private int RUC;
-    private String email;
-    private int phoneNumber;
-    private String company;
 
+    @SerializedName("company_name")
+    private String name;
+
+//    private int RUC;
+//    private String email;
+//    private int phoneNumber;
+//    private String company;
+    @Override
+    public String toString() {
+        return "Supplier={id="
+                + id;
+    }
 }

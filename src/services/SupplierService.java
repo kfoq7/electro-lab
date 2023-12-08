@@ -13,15 +13,21 @@ public class SupplierService {
     private Statement st;
     private ResultSet rs;
     private String query;
-    
+
     private Fetch<Supplier> fetch;
 
     public SupplierService() {
         fetch = new Fetch<>("/entities/supplier", Supplier.class);
     }
-    
-//    public Array
-    
+
+    public ArrayList<Supplier> getAllSupplier() throws Exception {
+        ArrayList<Supplier> list;
+
+        list = fetch.get();
+
+        return list;
+    }
+
 //
 //    public ArrayList<Supplier> getAllSupplier() throws SQLException {
 //        ArrayList<Supplier> list = new ArrayList<>();
@@ -45,8 +51,6 @@ public class SupplierService {
 //        } finally {
 //            cn.close();
 //        }
-
 //        return list;
 //    }
-
 }

@@ -130,14 +130,14 @@ public class InventoryPanel extends javax.swing.JPanel {
 
     private void updateTable() {
         for (Product product : products) {
-            Object[] row = {product.getId(), product.getName(), product.getStock(), product.getSupplierId()};
+            Object[] row = {product.getId(), product.getName(), product.getStock(), product.getSupplier().getName()};
             tableModel.addRow(row);
         }
     }
 
     private void updateTable(ArrayList<Product> productList) {
         for (Product product : productList) {
-            Object[] row = {product.getId(), product.getName(), product.getStock(), product.getSupplierId()};
+            Object[] row = {product.getId(), product.getName(), product.getStock(), product.getSupplier().getName()};
             tableModel.addRow(row);
         }
     }
