@@ -1,14 +1,16 @@
 package models;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.NoArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class User {
 
-    @JsonProperty("")
+//    @JsonProperty("")
     private int id;
     private String password;
     private String username;

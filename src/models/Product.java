@@ -3,9 +3,12 @@ package models;
 import com.google.gson.annotations.SerializedName;
 import lombok.NoArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class Product {
 
     @SerializedName("id")

@@ -1,10 +1,12 @@
 package models;
 
 import lombok.NoArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 public class Employee {
 
     int id;
