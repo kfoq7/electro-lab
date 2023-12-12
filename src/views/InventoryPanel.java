@@ -17,7 +17,7 @@ public class InventoryPanel extends javax.swing.JPanel {
     
     DefaultTableModel tableModel;
 
-    ArrayList<Product> products = new ArrayList<>();
+    ArrayList<Product> products;
 
     String[] header = {"id", "nombre", "stock", "proveedor"};
     User user = new User();
@@ -31,17 +31,9 @@ public class InventoryPanel extends javax.swing.JPanel {
         
         txtSearch.setText(" BUSCAR PRODUCTO");
         controller = new ProductController();
-        
-        Product temp = new Product();
-        Supplier sup = new Supplier();
-        temp.setId(1);
-        temp.setName("dawd");
-        temp.setStock(12);
-        sup.setId(1);
-        sup.setName("dawd");
-        temp.setSupplier(sup);
-        products.add(temp);
-        //products = controller.getProducts();
+      
+       
+        products = controller.getProducts();
 
         tableModel = new DefaultTableModel(header, 0);
         tableInventory.setModel(tableModel);
@@ -149,14 +141,16 @@ public class InventoryPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -2,6 +2,8 @@ package views;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import lib.utils.DateTimeUtility;
 import lib.utils.ErrorHandler;
@@ -12,7 +14,7 @@ public class MainFrame extends javax.swing.JFrame {
     User user;
     Exit exit;
 
-    public MainFrame() throws SQLException {
+    public MainFrame() throws SQLException, Exception {
         initComponents();
 
         labelDate.setText(getDateNow());
@@ -80,7 +82,7 @@ public class MainFrame extends javax.swing.JFrame {
         inicioButton.setForeground(new java.awt.Color(50, 59, 65));
         inicioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         inicioButton.setText("Inicio");
-        inicioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        inicioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         inicioButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 inicioButtonMousePressed(evt);
@@ -105,8 +107,8 @@ public class MainFrame extends javax.swing.JFrame {
         inventarioButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         inventarioButton.setForeground(new java.awt.Color(50, 59, 65));
         inventarioButton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        inventarioButton.setText("Inventario");
-        inventarioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        inventarioButton.setText("Almacen");
+        inventarioButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         inventarioButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 inventarioButtonMousePressed(evt);
@@ -131,8 +133,8 @@ public class MainFrame extends javax.swing.JFrame {
         gestionInventarioButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         gestionInventarioButton2.setForeground(new java.awt.Color(50, 59, 65));
         gestionInventarioButton2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        gestionInventarioButton2.setText("Gestion Inventario");
-        gestionInventarioButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        gestionInventarioButton2.setText("Registro de Alumno");
+        gestionInventarioButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gestionInventarioButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 gestionInventarioButton2MousePressed(evt);
@@ -160,7 +162,7 @@ public class MainFrame extends javax.swing.JFrame {
         gestionInventarioButton1.setForeground(new java.awt.Color(50, 59, 65));
         gestionInventarioButton1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         gestionInventarioButton1.setText("Cerrar Sesión");
-        gestionInventarioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        gestionInventarioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         gestionInventarioButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 gestionInventarioButton1MousePressed(evt);
@@ -250,14 +252,14 @@ public class MainFrame extends javax.swing.JFrame {
     private void inicioButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inicioButtonMousePressed
         try {
             setForm(new Home());
-        } catch (SQLException ex) {
-            ErrorHandler.formException(ex);
+        } catch (Exception ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_inicioButtonMousePressed
 
     private void gestionInventarioButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gestionInventarioButton2MousePressed
         try {
-            setForm(new Gestion(user));
+            setForm(new Asistencias());
         } catch (Exception ex) {
             ErrorHandler.formException(ex);
         }
@@ -295,6 +297,8 @@ public class MainFrame extends javax.swing.JFrame {
                     new MainFrame().setVisible(true);
                 } catch (SQLException ex) {
                     ErrorHandler.formException(ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
