@@ -228,6 +228,7 @@ public class GestionView extends javax.swing.JFrame {
             ErrorHandler.formException(ex);
         }
         
+     
         
     }//GEN-LAST:event_jLabel5MousePressed
 

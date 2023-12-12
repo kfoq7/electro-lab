@@ -24,7 +24,7 @@ public class MainFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
-    public MainFrame(User user) throws SQLException {
+    public MainFrame(User user) throws SQLException, Exception {
         initComponents();
 
         this.user = user;
