@@ -20,7 +20,7 @@ public class MainFrame extends javax.swing.JFrame {
         exit = new Exit();
 
         setForm(new Home());
-        setResizable(false);
+
         setLocationRelativeTo(null);
     }
 

@@ -63,9 +63,10 @@ public class Detalle extends javax.swing.JPanel {
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(0, 0, 0));
         jLabel23.setText("DETALLE INVENTARIO");
 
-        jPanel15.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel2.setBackground(new java.awt.Color(0, 124, 195));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -82,7 +83,7 @@ public class Detalle extends javax.swing.JPanel {
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
-        jPanel14.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel3.setBackground(new java.awt.Color(0, 124, 195));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -99,6 +100,7 @@ public class Detalle extends javax.swing.JPanel {
             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
         );
 
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("CODIGO");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -120,6 +122,7 @@ public class Detalle extends javax.swing.JPanel {
                 .addComponent(TxtCodigo2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("NOMBRE");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -143,6 +146,7 @@ public class Detalle extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jLabel22.setForeground(new java.awt.Color(0, 0, 0));
         jLabel22.setText("PROVEEDOR");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -163,6 +167,7 @@ public class Detalle extends javax.swing.JPanel {
                 .addComponent(TxtProveedor3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
         jLabel21.setText("FECHA DE ADQUISICIÓN");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -184,6 +189,7 @@ public class Detalle extends javax.swing.JPanel {
                 .addComponent(TxtFechaAd3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jLabel24.setForeground(new java.awt.Color(0, 0, 0));
         jLabel24.setText("STOCK");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
