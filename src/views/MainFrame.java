@@ -20,7 +20,7 @@ public class MainFrame extends javax.swing.JFrame {
         exit = new Exit();
 
         setForm(new Home());
-
+        setResizable(false);
         setLocationRelativeTo(null);
     }
 
@@ -285,6 +285,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
