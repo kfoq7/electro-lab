@@ -18,6 +18,9 @@ import models.Product;
 import models.Supplier;
 import models.User;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -229,6 +232,20 @@ public class GestionView extends javax.swing.JFrame {
         }
         
      
+        Product product = new Product();
+        product.setId(Integer.parseInt(txtID.getText()));
+        product.setName(txtNombre.getText());
+        product.setStock(Integer.parseInt(txtStock.getText()));
+        product.setSupplier(supplier);
+        
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        product.setDate(LocalDate.parse(txtFecha.getText(), format));
+        
+        try {
+            productController.saveProduct(product);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jLabel5MousePressed
 
@@ -277,6 +294,7 @@ public class GestionView extends javax.swing.JFrame {
         txtID.setText(String.valueOf(product.getId()));
         txtNombre.setText(product.getName());
         txtStock.setText(String.valueOf(product.getStock()));
+        txtFecha.setText(String.valueOf(product.getDate()));
         jComboBox1.addItem(product.getSupplier().getName());
     }
     private Object[] getDataProductField() {

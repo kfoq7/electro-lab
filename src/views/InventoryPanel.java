@@ -17,7 +17,7 @@ public class InventoryPanel extends javax.swing.JPanel {
     
     DefaultTableModel tableModel;
 
-    ArrayList<Product> products;
+    ArrayList<Product> products = new ArrayList<>();
 
     String[] header = {"id", "nombre", "stock", "proveedor"};
     User user = new User();
@@ -33,7 +33,7 @@ public class InventoryPanel extends javax.swing.JPanel {
         controller = new ProductController();
       
        
-        products = controller.getProducts();
+        //products = controller.getProducts();
 
         tableModel = new DefaultTableModel(header, 0);
         tableInventory.setModel(tableModel);

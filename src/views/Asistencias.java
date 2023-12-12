@@ -4,17 +4,59 @@
  */
 package views;
 
+import java.util.ArrayList;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+import models.Student;
+
 /**
  *
  * @author Enma
  */
 public class Asistencias extends javax.swing.JPanel {
-
-    /**
-     * Creates new form Detalle
-     */
+    
+    DefaultTableModel tableModel;
+    
+    ArrayList<Student> studentsList = new ArrayList<>();
+    
+    String[] header = {"CODIGO", "CARRERA", "APPELLIDO Y NOMBRE", "FECHA/HORA", "CICLO", "ASITENCIA"};
+    
     public Asistencias() {
         initComponents();
+        
+        tableModel = new DefaultTableModel(header, 0) {
+            @Override
+            public Class<?> getColumnClass(int index) {
+                if (index == 5) {
+                    return Boolean.class;
+                }
+                return super.getColumnClass(index);
+            }
+        }; 
+        
+        Object[] rofila = {"12031023012", "Sitemas", "luis", "2000-12-1", "4", true};
+        
+        tableModel.addRow(rofila);
+        tableStudent.setModel(tableModel);
+        
+        
+        txtSearch.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                filter();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                filter();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                filter();
+            }
+        });
     }
 
     /**
@@ -29,7 +71,7 @@ public class Asistencias extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableInventory = new javax.swing.JTable();
+        tableStudent = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         ButtonConsult = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
@@ -47,7 +89,7 @@ public class Asistencias extends javax.swing.JPanel {
 
         jPanel16.setBackground(new java.awt.Color(255, 255, 255));
 
-        tableInventory.setModel(new javax.swing.table.DefaultTableModel(
+        tableStudent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -58,7 +100,7 @@ public class Asistencias extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tableInventory);
+        jScrollPane1.setViewportView(tableStudent);
 
         jLabel1.setFont(new java.awt.Font("Noto Sans", 1, 30)); // NOI18N
         jLabel1.setText("ASISTENCIA");
@@ -149,6 +191,15 @@ public class Asistencias extends javax.swing.JPanel {
         txtSearch.setText("");
     }//GEN-LAST:event_txtSearchMousePressed
 
+    private void filter() {
+        String text = txtSearch.getText();
+        ArrayList<Student> filteredStudents = new ArrayList<>();
+        for (Student student : studentsList) {
+            if (student.getNames().toLowerCase().contains(text.toLowerCase())) {
+                filteredStudents.add(student);
+            }
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ButtonConsult;
@@ -156,7 +207,7 @@ public class Asistencias extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableInventory;
+    private javax.swing.JTable tableStudent;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
