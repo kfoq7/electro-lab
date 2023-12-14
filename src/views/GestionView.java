@@ -34,8 +34,8 @@ public class GestionView extends javax.swing.JFrame {
     String[][] data;
 
     User user;
-    ArrayList<Supplier> supplierList = new ArrayList<>();
-    ArrayList<Product> products = new ArrayList<>();
+    ArrayList<Supplier> supplierList;
+    
     
     ProductController productController;
     InventarioConrtoller inventoryController;
@@ -54,7 +54,7 @@ public class GestionView extends javax.swing.JFrame {
         initProductTable();
 
         
-        //ADD PRODUCTS
+        /*ADD PRODUCTS
         
         Supplier supplier1 = new Supplier();
         supplier1.setId(1);
@@ -108,10 +108,10 @@ public class GestionView extends javax.swing.JFrame {
         products.add(product4);
         products.add(product5);
         
-        //END
+        //END */
         loadSupplier();
        
-        //loadProductTable();
+        loadProductTable(0);
     }
 
     /**
@@ -272,28 +272,9 @@ public class GestionView extends javax.swing.JFrame {
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
         Inventory inventory = new Inventory();
-        Supplier supplier;
+        Supplier supplier = null;
 
-        try {
-            inventory.setFechaEntrada(DateTimeUtility.parerDate(txtFecha.getText()));
-        } catch (ParseException ex) {
-            ErrorHandler.formException(ex);
-        }
 
-        inventory.setUsuario(user);
-        inventory.setProductos(getSelectedProducts());
-        Supplier supplierSelected = getSelectedSupplier();
-        supplier = new Supplier();
-        supplier.setId(supplierSelected.getId());
-        supplier.setName(supplierSelected.getName());
-        inventory.setProveedor(supplier);
-
-        try {
-            inventoryController.saveInventory(inventory);
-        } catch (SQLException ex) {
-            ErrorHandler.formException(ex);
-        }
-        
      
         Product product = new Product();
         product.setId(Integer.parseInt(txtID.getText()));
@@ -406,9 +387,9 @@ public class GestionView extends javax.swing.JFrame {
     }
 
     private void loadProductTable(int id) throws Exception {
-        //ArrayList<Product> productList = productController.getProducts();
+        ArrayList<Product> productList = productController.getProducts();
         tableProductModel.setNumRows(0);
-        for (Product product : products) {
+        for (Product product : productList) {
             if (id == product.getSupplier().getId()) {
                 Object[] row = {product.getId(), product.getName()};
                 tableProductModel.addRow(row);
