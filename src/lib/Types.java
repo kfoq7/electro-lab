@@ -9,5 +9,5 @@ public final class Types {
     public static final int INACTIVE = 0;
 
     public static final int ACTIVE = 1;
-
+    
 }

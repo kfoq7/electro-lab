@@ -9,7 +9,7 @@ public class SupplierService {
     private Fetch<Supplier> fetch;
 
     public SupplierService() {
-        fetch = new Fetch<>("/entities/supplier", Supplier.class);
+        fetch = new Fetch<>("/entities/supplier/", Supplier.class);
     }
 
     public ArrayList<Supplier> getAllSupplier() throws Exception {

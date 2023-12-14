@@ -31,7 +31,7 @@ public class Home extends javax.swing.JPanel {
         ProductLabel.setText(String.valueOf(controllerProduct.getProducts().size()));
 
         controllerSupplier = new SupplierController();
-        SupplierLabel.setText(String.valueOf(controllerSupplier.getSuppliers().size()));
+//        SupplierLabel.setText(String.valueOf(controllerSupplier.getSuppliers().size()));
 
         tableModel = new DefaultTableModel(data, cabezera);
         tablaInventario.setModel(tableModel);

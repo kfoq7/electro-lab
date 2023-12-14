@@ -10,87 +10,85 @@ import javax.swing.JDialog;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
+import lib.ActionTypes;
 import models.Product;
 import models.Supplier;
 import models.User;
 
 public class InventoryPanel extends javax.swing.JPanel {
-    
-    DefaultTableModel tableModel;
 
-    ArrayList<Product> products = new ArrayList<>();
+    private DefaultTableModel tableModel;
+    private String[] header = {"id", "nombre", "stock", "proveedor"};
+    private String[][] data;
+    private GestionView gestionView;
+    private ArrayList<Product> products;
 
-    String[] header = {"id", "nombre", "stock", "proveedor"};
     User user = new User();
-    GestionView gestionPanel = new GestionView();
+//    GestionView gestionPanel = new GestionView(); 
 
 //    InventarioConrtoller controller;
     ProductController controller;
 
     public InventoryPanel() throws Exception {
         initComponents();
-        
+
         txtSearch.setText(" BUSCAR PRODUCTO");
         controller = new ProductController();
-      
-       
-        //products = controller.getProducts();
+
+        products = controller.getProducts();
 
         //ADD PRODUCTS
-        
-        Supplier supplier1 = new Supplier();
-        supplier1.setId(1);
-        supplier1.setName("Supplier 1");
-
-        Supplier supplier2 = new Supplier();
-        supplier2.setId(2);
-        supplier2.setName("Supplier 2");
-
-        
-        Product product1 = new Product();
-        product1.setId(1);
-        product1.setName("Product 1");
-        product1.setStock(10);
-        product1.setDate(LocalDate.now());
-        product1.setSupplier(supplier1); 
-
-        Product product2 = new Product();
-        product2.setId(2);
-        product2.setName("Product 2");
-        product2.setStock(20);
-        product2.setDate(LocalDate.now().minusDays(1));
-        product2.setSupplier(supplier2); 
-
-        Product product3 = new Product();
-        product3.setId(3);
-        product3.setName("Product 3");
-        product3.setStock(15);
-        product3.setDate(LocalDate.now().minusDays(2)); 
-        product3.setSupplier(supplier1); 
-
-        Product product4 = new Product();
-        product4.setId(4);
-        product4.setName("Product 4");
-        product4.setStock(8);
-        product4.setDate(LocalDate.now().minusDays(3)); 
-        product4.setSupplier(supplier2); 
-
-        Product product5 = new Product();
-        product5.setId(5);
-        product5.setName("Product 5");
-        product5.setStock(25);
-        product5.setDate(LocalDate.now().minusDays(4)); 
-        product5.setSupplier(supplier1); 
-
-        products.add(product1);
-        products.add(product2);
-        products.add(product3);
-        products.add(product4);
-        products.add(product5);
-        
-        
+//        
+//        Supplier supplier1 = new Supplier();
+//        supplier1.setId(1);
+//        supplier1.setName("Supplier 1");
+//
+//        Supplier supplier2 = new Supplier();
+//        supplier2.setId(2);
+//        supplier2.setName("Supplier 2");
+//
+//        
+//        Product product1 = new Product();
+//        product1.setId(1);
+//        product1.setName("Product 1");
+//        product1.setStock(10);
+////        product1.setDate(LocalDate.now());
+//        product1.setSupplier(supplier1); 
+//
+//        Product product2 = new Product();
+//        product2.setId(2);
+//        product2.setName("Product 2");
+//        product2.setStock(20);
+////        product2.setDate(LocalDate.now().minusDays(1));
+//        product2.setSupplier(supplier2); 
+//
+//        Product product3 = new Product();
+//        product3.setId(3);
+//        product3.setName("Product 3");
+//        product3.setStock(15);
+////        product3.setDate(LocalDate.now().minusDays(2)); 
+//        product3.setSupplier(supplier1); 
+//
+//        Product product4 = new Product();
+//        product4.setId(4);
+//        product4.setName("Product 4");
+//        product4.setStock(8);
+////        product4.setDate(LocalDate.now().minusDays(3)); 
+//        product4.setSupplier(supplier2); 
+//
+//        Product product5 = new Product();
+//        product5.setId(5);
+//        product5.setName("Product 5");
+//        product5.setStock(25);
+////        product5.setDate(LocalDate.now().minusDays(4)); 
+//        product5.setSupplier(supplier1); 
+//
+//        products.add(product1);
+//        products.add(product2);
+//        products.add(product3);
+//        products.add(product4);
+//        products.add(product5);
         //END
-        
         tableModel = new DefaultTableModel(header, 0);
         tableInventory.setModel(tableModel);
         updateTable();
@@ -216,12 +214,22 @@ public class InventoryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSearchMousePressed
 
     private void ButtonConsultKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ButtonConsultKeyPressed
-        // TODO add your handling code here:
-        
+        try {
+            gestionView = new GestionView(ActionTypes.UPDATE);
+            System.out.println("printing");
+            gestionView.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ButtonConsultKeyPressed
 
     private void ButtonAddMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonAddMousePressed
-        gestionPanel.setVisible(true);
+        try {
+            gestionView = new GestionView(ActionTypes.CREATE);
+            gestionView.setVisible(true);
+        } catch (Exception ex) {
+            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ButtonAddMousePressed
 
     private void ButtonDeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonDeleteMousePressed
@@ -233,12 +241,12 @@ public class InventoryPanel extends javax.swing.JPanel {
 
     private void ButtonConsultMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonConsultMousePressed
         // TODO add your handling code here:
-        
+
         int id = (Integer) tableModel.getValueAt(tableInventory.getSelectedRow(), 0);
         Product productFound = searchProduct(id);
-        gestionPanel.setDataField(productFound);
-        gestionPanel.setVisible(true);
-        gestionPanel.details(false);
+//        gestionPanel.setDataField(productFound);
+//        gestionPanel.setVisible(true);
+//        gestionPanel.details(false);
     }//GEN-LAST:event_ButtonConsultMousePressed
 
 
@@ -253,18 +261,16 @@ public class InventoryPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 
-   
-    
     private Product searchProduct(int id) {
         for (Product product : products) {
             if ((product.getId() == id)) {
                 return product;
             }
-   
+
         }
         return null;
     }
-   
+
     private void updateTable() {
         for (Product product : products) {
             Object[] row = {product.getId(), product.getName(), product.getStock(), product.getSupplier().getName()};

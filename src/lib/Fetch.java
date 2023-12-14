@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Fetch<T> {
 
-    private final String API_URL = System.getProperty("API_URL");
+    private final String API_URL = "http://localhost:8000/api";
     private String endpoint;
     private ArrayList<T> objectList;
     private HttpClient client;
@@ -33,8 +33,10 @@ public class Fetch<T> {
     public ArrayList<T> get() {
         try {
             setGetRequest();
+            System.out.println(request.headers());
             response = sendRequest();
-//            System.out.println(response.body());
+//            response.request
+            System.out.println(response.request());
 
             objectList = jsonParser.parserList(response.body());
         } catch (Exception ex) {
@@ -73,16 +75,17 @@ public class Fetch<T> {
 
     private void setGetRequest() {
         request = HttpRequest.newBuilder()
+                .headers("Accept", "application/json")
+                .headers("Content-Type", "application/json")
                 .uri(URI.create(API_URL + endpoint))
-                .setHeader("Content-Type", "application/json")
                 .build();
     }
 
     private void setPostRequest(String requestBody) {
         request = HttpRequest.newBuilder()
-                .uri((URI.create(API_URL + endpoint)))
-                .setHeader("Content-Type", "application/json")
+                .uri(URI.create(API_URL + endpoint))
                 .POST(BodyPublishers.ofString(requestBody))
+                .header("Content-Type", "application/json")
                 .build();
     }
 

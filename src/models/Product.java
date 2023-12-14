@@ -22,10 +22,10 @@ public class Product {
 
     @SerializedName("supplier")
     private Supplier supplier;
-
-    @SerializedName("date_product")
-    private LocalDate date;
-    
+//
+//    @SerializedName("date_product")
+//    private LocalDate date;
+//    
     @Override
     public String toString() {
         return id + ": " + name;
