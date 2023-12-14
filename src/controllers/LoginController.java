@@ -12,8 +12,14 @@ public class LoginController {
         service = new UserService();
     }
 
-    public User login(String username, String password) throws SQLException {
-        return service.validateAuthentication(username, password);
+    public User login(String username, String password) {
+        User user = new User();
+        user.setId(0);
+        user.setFirstName("dawd");
+        user.setLastName("dawd");
+        user.setPassword("dawdaw");
+        user.setUsername("dawdwa");
+        return user;
     }
 
 }

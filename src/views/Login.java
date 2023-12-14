@@ -178,10 +178,12 @@ public class Login extends javax.swing.JFrame {
 
         try {
             user = controller.login(username, password);
-
-            mainFrame = new MainFrame(user);
-            mainFrame.setVisible(true);
-            dispose();
+            if (user != null) {
+                mainFrame = new MainFrame(user);
+                mainFrame.setVisible(true);
+                dispose();
+            }
+            
         } catch (Exception ex) {
             ErrorHandler.formException(ex);
         }

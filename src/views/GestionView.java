@@ -271,7 +271,7 @@ public class GestionView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
-        Inventory inventory = new Inventory();
+         Inventory inventory = new Inventory();
         Supplier supplier = null;
 
 
