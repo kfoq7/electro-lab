@@ -1,4 +1,4 @@
-package services;
+package lib;
 
 import com.google.gson.internal.$Gson$Types;
 import com.google.gson.Gson;

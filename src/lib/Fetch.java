@@ -1,4 +1,4 @@
-package services;
+package lib;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Fetch<T> {
 
-    private final String api = "http://127.0.0.1:8000/api";
+    private final String API_URL = System.getProperty("API_URL");
     private String endpoint;
     private ArrayList<T> objectList;
     private HttpClient client;
@@ -73,14 +73,14 @@ public class Fetch<T> {
 
     private void setGetRequest() {
         request = HttpRequest.newBuilder()
-                .uri(URI.create(api + endpoint))
+                .uri(URI.create(API_URL + endpoint))
                 .setHeader("Content-Type", "application/json")
                 .build();
     }
 
     private void setPostRequest(String requestBody) {
         request = HttpRequest.newBuilder()
-                .uri((URI.create(api + endpoint)))
+                .uri((URI.create(API_URL + endpoint)))
                 .setHeader("Content-Type", "application/json")
                 .POST(BodyPublishers.ofString(requestBody))
                 .build();

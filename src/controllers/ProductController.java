@@ -1,6 +1,5 @@
 package controllers;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Product;
 import services.ProductService;
@@ -17,8 +16,7 @@ public class ProductController {
         return service.getAllProducts();
     }
 
-    public void saveProduct(Product product) throws SQLException {
-        service.createProduct(product);
-    }
-
+//    public void saveProduct(Product product) throws SQLException {
+//        service.createProduct(product);
+//    }
 }

@@ -3,18 +3,18 @@ package controllers;
 import java.sql.SQLException;
 import java.util.List;
 import models.User;
-import services.UserService;
+import services.AuthService;
 
 public class UsuarioController {
 
-    UserService service;
+    AuthService service;
 
     public UsuarioController() {
-        service = new UserService();
+        service = new AuthService();
     }
 
-    public List<User> getUsuarios() throws SQLException {
-        return service.getAllUsers();
-    }
+//    public List<User> getUsuarios() throws SQLException {
+//        return service.getAllUsers();
+//    }
 
 }

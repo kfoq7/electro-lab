@@ -1,15 +1,15 @@
 package controllers;
 
-import java.sql.SQLException;
 import models.User;
-import services.UserService;
+import services.AuthService;
+
 
 public class LoginController {
 
-    UserService service;
+    AuthService service;
 
-    public LoginController() throws SQLException {
-        service = new UserService();
+    public LoginController() {
+//        service = new AuthService();
     }
 
     public User login(String username, String password) {
@@ -19,6 +19,7 @@ public class LoginController {
         user.setLastName("dawd");
         user.setPassword("dawdaw");
         user.setUsername("dawdwa");
+
         return user;
     }
 

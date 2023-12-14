@@ -1,7 +1,6 @@
 package views;
 
 import controllers.LoginController;
-import java.sql.SQLException;
 import lib.utils.ErrorHandler;
 import models.User;
 
@@ -11,7 +10,7 @@ public class Login extends javax.swing.JFrame {
     private MainFrame mainFrame;
     private LoginController controller;
 
-    public Login() throws SQLException {
+    public Login() {
         initComponents();
 
         controller = new LoginController();
@@ -219,7 +218,7 @@ public class Login extends javax.swing.JFrame {
             public void run() {
                 try {
                     new Login().setVisible(true);
-                } catch (SQLException ex) {
+                } catch (Exception ex) {
                     ErrorHandler.formException(ex);
                 }
             }

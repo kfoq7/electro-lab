@@ -2,9 +2,9 @@ package services;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import lib.Fetch;
 import models.Product;
 
 public class ProductService {
@@ -58,21 +58,4 @@ public class ProductService {
 //
 //        return lista;
 //    }
-    public void createProduct(Product product) throws SQLException {
-        String query;
-
-        try {
-            cn = SQLConnection.getConnection();
-            query = "{call (?, ?, ?, ?, ?, ?)}";
-
-            cs = cn.prepareCall(query);
-            cs.setInt(1, product.getId());
-//            cs.set
-        } catch (Exception ex) {
-            throw ex;
-        } finally {
-            cn.close();
-        }
-    }
-
 }

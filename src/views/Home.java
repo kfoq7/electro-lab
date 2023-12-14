@@ -13,7 +13,7 @@ import models.Supplier;
 import models.User;
 
 public class Home extends javax.swing.JPanel {
-    
+
     User user;
     ProductController controllerProduct;
     DefaultTableModel tableModel;
@@ -24,16 +24,15 @@ public class Home extends javax.swing.JPanel {
 
     UsuarioController usuarioController;
 
-    public Home() throws SQLException, Exception {
+    public Home() throws Exception {
         initComponents();
-        
+
         controllerProduct = new ProductController();
         ProductLabel.setText(String.valueOf(controllerProduct.getProducts().size()));
-        
+
         controllerSupplier = new SupplierController();
         SupplierLabel.setText(String.valueOf(controllerSupplier.getSuppliers().size()));
-        
-        
+
         tableModel = new DefaultTableModel(data, cabezera);
         tablaInventario.setModel(tableModel);
 
@@ -112,10 +111,10 @@ public class Home extends javax.swing.JPanel {
     private javax.swing.JTable tablaInventario;
     // End of variables declaration//GEN-END:variables
 
-    private void updateTable() throws SQLException{
-        for (User user : usuarioController.getUsuarios()) {
-            LocalDate date = LocalDate.now();
-        }
+    private void updateTable() throws SQLException {
+//        for (User user : usuarioController.getUsuarios()) {
+//            LocalDate date = LocalDate.now();
+//        }
     }
 //    private void updateTable() throws SQLException {
 //        for (User usuario : usuarioController.getUsuarios()) {

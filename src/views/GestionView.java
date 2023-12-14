@@ -1,12 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package views;
 
 import controllers.InventarioConrtoller;
 import controllers.ProductController;
-import controllers.SupplierController;
 import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.ListSelectionModel;
@@ -17,17 +12,14 @@ import models.Inventory;
 import models.Product;
 import models.Supplier;
 import models.User;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-/**
- *
- * @author luis
- */
+
 public class GestionView extends javax.swing.JFrame {
+
     DefaultTableModel tableProductModel;
 
     String[] header = {"id", "name"};
@@ -35,27 +27,28 @@ public class GestionView extends javax.swing.JFrame {
 
     User user;
     ArrayList<Supplier> supplierList;
-    
-    
+
+    ArrayList<Supplier> supplierListA = new ArrayList<>();
+    ArrayList<Product> products = new ArrayList<>();
+
     ProductController productController;
     InventarioConrtoller inventoryController;
-    SupplierController supplierController;
-   
-    public GestionView() throws Exception{
+
+    public GestionView() throws Exception {
         initComponents();
-        
+
         this.user = user;
 
-        productController = new ProductController();
         inventoryController = new InventarioConrtoller();
-        supplierController = new SupplierController();
 
         createProductTable();
         initProductTable();
 
-        
         /*ADD PRODUCTS
         
+=======
+        //ADD PRODUCTS
+>>>>>>> Stashed changes
         Supplier supplier1 = new Supplier();
         supplier1.setId(1);
         supplier1.setName("Supplier 1");
@@ -66,52 +59,58 @@ public class GestionView extends javax.swing.JFrame {
 
         supplierList.add(supplier1);
         supplierList.add(supplier2);
-        
+
         Product product1 = new Product();
         product1.setId(1);
         product1.setName("Product 1");
         product1.setStock(10);
         product1.setDate(LocalDate.now());
-        product1.setSupplier(supplier1); 
+        product1.setSupplier(supplier1);
 
         Product product2 = new Product();
         product2.setId(2);
         product2.setName("Product 2");
         product2.setStock(20);
         product2.setDate(LocalDate.now().minusDays(1));
-        product2.setSupplier(supplier2); 
+        product2.setSupplier(supplier2);
 
         Product product3 = new Product();
         product3.setId(3);
         product3.setName("Product 3");
         product3.setStock(15);
-        product3.setDate(LocalDate.now().minusDays(2)); 
-        product3.setSupplier(supplier1); 
+        product3.setDate(LocalDate.now().minusDays(2));
+        product3.setSupplier(supplier1);
 
         Product product4 = new Product();
         product4.setId(4);
         product4.setName("Product 4");
         product4.setStock(8);
-        product4.setDate(LocalDate.now().minusDays(3)); 
-        product4.setSupplier(supplier2); 
+        product4.setDate(LocalDate.now().minusDays(3));
+        product4.setSupplier(supplier2);
 
         Product product5 = new Product();
         product5.setId(5);
         product5.setName("Product 5");
         product5.setStock(25);
-        product5.setDate(LocalDate.now().minusDays(4)); 
-        product5.setSupplier(supplier1); 
+        product5.setDate(LocalDate.now().minusDays(4));
+        product5.setSupplier(supplier1);
 
         products.add(product1);
         products.add(product2);
         products.add(product3);
         products.add(product4);
         products.add(product5);
+<<<<<<< Updated upstream
         
         //END */
         loadSupplier();
-       
+
         loadProductTable(0);
+
+        //END
+        loadSupplier();
+
+        //loadProductTable();
     }
 
     /**
@@ -271,26 +270,24 @@ public class GestionView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
-         Inventory inventory = new Inventory();
+        Inventory inventory = new Inventory();
         Supplier supplier = null;
 
-
-     
-        Product product = new Product();
-        product.setId(Integer.parseInt(txtID.getText()));
-        product.setName(txtNombre.getText());
-        product.setStock(Integer.parseInt(txtStock.getText()));
-        product.setSupplier(supplier);
-        
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        product.setDate(LocalDate.parse(txtFecha.getText(), format));
-        
         try {
-            productController.saveProduct(product);
-        } catch (SQLException ex) {
-            Logger.getLogger(GestionView.class.getName()).log(Level.SEVERE, null, ex);
+            inventory.setDeliveryDate(DateTimeUtility.parerDate(txtFecha.getText()));
+        } catch (ParseException ex) {
+            ErrorHandler.formException(ex);
         }
-        
+
+        inventory.setUsuario(user);
+        inventory.setProductos(getSelectedProducts());
+        Supplier supplierSelected = getSelectedSupplier();
+        supplier.setId(supplierSelected.getId());
+        supplier.setName(supplierSelected.getName());
+//        inventory.set(supplier);
+
+        inventoryController.saveInventory(inventory);
+
     }//GEN-LAST:event_jLabel5MousePressed
 
     private void CBSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBSupplierActionPerformed
@@ -301,7 +298,7 @@ public class GestionView extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(GestionView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_CBSupplierActionPerformed
 
     /**
@@ -343,7 +340,7 @@ public class GestionView extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private int searchSupplierId(String name) {
         for (Supplier supplier : supplierList) {
             if (supplier.getName().toLowerCase().contains(name.toLowerCase())) {
@@ -352,6 +349,7 @@ public class GestionView extends javax.swing.JFrame {
         }
         return 0;
     }
+
     public void details(boolean enableEdit) {
         CBSupplier.setEnabled(enableEdit);
     }
@@ -363,16 +361,15 @@ public class GestionView extends javax.swing.JFrame {
         txtFecha.setText(String.valueOf(product.getDate()));
         CBSupplier.addItem(product.getSupplier().getName());
     }
+
     private Object[] getDataProductField() {
         Object[] data = {
             txtID.getText(),
             txtNombre.getText(),
-            txtStock.getText(),
-        };
+            txtStock.getText(),};
         return data;
     }
-            
-    
+
     private void initProductTable() {
         tableProduct.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         tableProduct.getSelectedRows();
@@ -393,7 +390,7 @@ public class GestionView extends javax.swing.JFrame {
             if (id == product.getSupplier().getId()) {
                 Object[] row = {product.getId(), product.getName()};
                 tableProductModel.addRow(row);
-            } 
+            }
         }
     }
 
