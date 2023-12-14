@@ -1,5 +1,6 @@
 package models;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,14 +8,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Employee {
+public class Employee extends User {
 
-    int id;
-    String nombre;
-    String apellido;
-    float sueldo;
-    int turno;
-    String usuario;
-    String password;
+    @SerializedName("id")
+    private int id;
+    
+    @SerializedName("salary")
+    private float salary;
+
+    @SerializedName("shift")
+    private String shift;
 
 }

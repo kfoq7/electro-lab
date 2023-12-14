@@ -15,10 +15,15 @@ public class Inventory {
     @SerializedName("id")
     private int id;
 
-    private Date fechaEntrada;
-    private Supplier proveedor;
-    
+    @SerializedName("delivery_date")
+    private Date deliveryDate;
+
     @SerializedName("products")
     private ArrayList<Product> productos;
+
+    @SerializedName("employee")
+    private Employee employee;
+
     private User usuario;
+
 }

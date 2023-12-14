@@ -1,7 +1,7 @@
 package models;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.NoArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,13 +10,20 @@ import lombok.Setter;
 @Setter
 public class User {
 
-//    @JsonProperty("")
+    @SerializedName("id")
     private int id;
+
+    @SerializedName("password")
     private String password;
+
+    @SerializedName("username")
     private String username;
+
+    @SerializedName("name")
     private String firstName;
+
+    @SerializedName("last_name")
     private String lastName;
-    private String shift;
 
     public String getFullName() {
         return firstName + lastName;
