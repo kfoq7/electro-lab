@@ -34,8 +34,9 @@ public class GestionView extends javax.swing.JFrame {
     String[][] data;
 
     User user;
-    ArrayList<Supplier> supplierList;
-
+    ArrayList<Supplier> supplierList = new ArrayList<>();
+    ArrayList<Product> products = new ArrayList<>();
+    
     ProductController productController;
     InventarioConrtoller inventoryController;
     SupplierController supplierController;
@@ -52,9 +53,65 @@ public class GestionView extends javax.swing.JFrame {
         createProductTable();
         initProductTable();
 
+        
+        //ADD PRODUCTS
+        
+        Supplier supplier1 = new Supplier();
+        supplier1.setId(1);
+        supplier1.setName("Supplier 1");
+
+        Supplier supplier2 = new Supplier();
+        supplier2.setId(2);
+        supplier2.setName("Supplier 2");
+
+        supplierList.add(supplier1);
+        supplierList.add(supplier2);
+        
+        Product product1 = new Product();
+        product1.setId(1);
+        product1.setName("Product 1");
+        product1.setStock(10);
+        product1.setDate(LocalDate.now());
+        product1.setSupplier(supplier1); 
+
+        Product product2 = new Product();
+        product2.setId(2);
+        product2.setName("Product 2");
+        product2.setStock(20);
+        product2.setDate(LocalDate.now().minusDays(1));
+        product2.setSupplier(supplier2); 
+
+        Product product3 = new Product();
+        product3.setId(3);
+        product3.setName("Product 3");
+        product3.setStock(15);
+        product3.setDate(LocalDate.now().minusDays(2)); 
+        product3.setSupplier(supplier1); 
+
+        Product product4 = new Product();
+        product4.setId(4);
+        product4.setName("Product 4");
+        product4.setStock(8);
+        product4.setDate(LocalDate.now().minusDays(3)); 
+        product4.setSupplier(supplier2); 
+
+        Product product5 = new Product();
+        product5.setId(5);
+        product5.setName("Product 5");
+        product5.setStock(25);
+        product5.setDate(LocalDate.now().minusDays(4)); 
+        product5.setSupplier(supplier1); 
+
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+        products.add(product5);
+        
+        //END
         loadSupplier();
        
-        loadProductTable();
+        //loadProductTable();
     }
 
     /**
@@ -75,7 +132,7 @@ public class GestionView extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtStock = new javax.swing.JTextField();
         labelStock = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        CBSupplier = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProduct = new javax.swing.JTable();
@@ -102,6 +159,12 @@ public class GestionView extends javax.swing.JFrame {
         jLabel11.setText("FECHA DE ADQUISICIÓN");
 
         labelStock.setText("STOCK");
+
+        CBSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBSupplierActionPerformed(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Frame 22ButtonUpdate.png"))); // NOI18N
 
@@ -162,7 +225,7 @@ public class GestionView extends javax.swing.JFrame {
                                     .addGap(10, 10, 10)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel4)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(CBSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGap(42, 42, 42)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGap(0, 24, Short.MAX_VALUE)))
@@ -195,7 +258,7 @@ public class GestionView extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel4)
                             .addGap(1, 1, 1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CBSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(20, 20, 20)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel2)
@@ -249,6 +312,17 @@ public class GestionView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabel5MousePressed
 
+    private void CBSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBSupplierActionPerformed
+        // TODO add your handling code here:
+        String supplierSelected = CBSupplier.getSelectedItem().toString();
+        try {
+            loadProductTable(searchSupplierId(supplierSelected));
+        } catch (Exception ex) {
+            Logger.getLogger(GestionView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_CBSupplierActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -289,13 +363,24 @@ public class GestionView extends javax.swing.JFrame {
         });
     }
     
-    
+    private int searchSupplierId(String name) {
+        for (Supplier supplier : supplierList) {
+            if (supplier.getName().toLowerCase().contains(name.toLowerCase())) {
+                return supplier.getId();
+            }
+        }
+        return 0;
+    }
+    public void details(boolean enableEdit) {
+        CBSupplier.setEnabled(enableEdit);
+    }
+
     public void setDataField(Product product) {
         txtID.setText(String.valueOf(product.getId()));
         txtNombre.setText(product.getName());
         txtStock.setText(String.valueOf(product.getStock()));
         txtFecha.setText(String.valueOf(product.getDate()));
-        jComboBox1.addItem(product.getSupplier().getName());
+        CBSupplier.addItem(product.getSupplier().getName());
     }
     private Object[] getDataProductField() {
         Object[] data = {
@@ -320,12 +405,14 @@ public class GestionView extends javax.swing.JFrame {
         tableProduct.setModel(tableProductModel);
     }
 
-    private void loadProductTable() throws Exception {
-        ArrayList<Product> productList = productController.getProducts();
-
-        for (Product product : productList) {
-            Object[] row = {product.getId(), product.getName()};
-            tableProductModel.addRow(row);
+    private void loadProductTable(int id) throws Exception {
+        //ArrayList<Product> productList = productController.getProducts();
+        tableProductModel.setNumRows(0);
+        for (Product product : products) {
+            if (id == product.getSupplier().getId()) {
+                Object[] row = {product.getId(), product.getName()};
+                tableProductModel.addRow(row);
+            } 
         }
     }
 
@@ -344,7 +431,7 @@ public class GestionView extends javax.swing.JFrame {
     }
 
     private Supplier getSelectedSupplier() {
-        String supplierName = String.valueOf(jComboBox1.getSelectedItem());
+        String supplierName = String.valueOf(CBSupplier.getSelectedItem());
         for (Supplier supplier : supplierList) {
             if (supplier.getName().equalsIgnoreCase(supplierName)) {
                 return supplier;
@@ -355,14 +442,14 @@ public class GestionView extends javax.swing.JFrame {
     }
 
     private void loadSupplier() throws Exception {
-        supplierList = supplierController.getSuppliers();
+        //supplierList = supplierController.getSuppliers();
 
         for (Supplier supplier : supplierList) {
-            jComboBox1.addItem(supplier.getName());
+            CBSupplier.addItem(supplier.getName());
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> CBSupplier;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

@@ -2,6 +2,7 @@ package views;
 
 import controllers.ProductController;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,6 +36,61 @@ public class InventoryPanel extends javax.swing.JPanel {
        
         //products = controller.getProducts();
 
+        //ADD PRODUCTS
+        
+        Supplier supplier1 = new Supplier();
+        supplier1.setId(1);
+        supplier1.setName("Supplier 1");
+
+        Supplier supplier2 = new Supplier();
+        supplier2.setId(2);
+        supplier2.setName("Supplier 2");
+
+        
+        Product product1 = new Product();
+        product1.setId(1);
+        product1.setName("Product 1");
+        product1.setStock(10);
+        product1.setDate(LocalDate.now());
+        product1.setSupplier(supplier1); 
+
+        Product product2 = new Product();
+        product2.setId(2);
+        product2.setName("Product 2");
+        product2.setStock(20);
+        product2.setDate(LocalDate.now().minusDays(1));
+        product2.setSupplier(supplier2); 
+
+        Product product3 = new Product();
+        product3.setId(3);
+        product3.setName("Product 3");
+        product3.setStock(15);
+        product3.setDate(LocalDate.now().minusDays(2)); 
+        product3.setSupplier(supplier1); 
+
+        Product product4 = new Product();
+        product4.setId(4);
+        product4.setName("Product 4");
+        product4.setStock(8);
+        product4.setDate(LocalDate.now().minusDays(3)); 
+        product4.setSupplier(supplier2); 
+
+        Product product5 = new Product();
+        product5.setId(5);
+        product5.setName("Product 5");
+        product5.setStock(25);
+        product5.setDate(LocalDate.now().minusDays(4)); 
+        product5.setSupplier(supplier1); 
+
+        products.add(product1);
+        products.add(product2);
+        products.add(product3);
+        products.add(product4);
+        products.add(product5);
+        
+        
+        //END
+        
         tableModel = new DefaultTableModel(header, 0);
         tableInventory.setModel(tableModel);
         updateTable();
@@ -165,7 +221,7 @@ public class InventoryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_ButtonConsultKeyPressed
 
     private void ButtonAddMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonAddMousePressed
-        
+        gestionPanel.setVisible(true);
     }//GEN-LAST:event_ButtonAddMousePressed
 
     private void ButtonDeleteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonDeleteMousePressed
@@ -182,6 +238,7 @@ public class InventoryPanel extends javax.swing.JPanel {
         Product productFound = searchProduct(id);
         gestionPanel.setDataField(productFound);
         gestionPanel.setVisible(true);
+        gestionPanel.details(false);
     }//GEN-LAST:event_ButtonConsultMousePressed
 
 
