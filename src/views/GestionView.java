@@ -124,12 +124,15 @@ public class GestionView extends javax.swing.JFrame {
     public GestionView(int action) throws Exception {
         initComponents();
 
+        
         this.action = action;
 
+        
         inventoryController = new InventarioConrtoller();
         supplierController = new SupplierController();
         productController = new ProductController();
 
+        setActiveForm();
         setLocationRelativeTo(null);
     }
 
@@ -152,7 +155,7 @@ public class GestionView extends javax.swing.JFrame {
         txtStock = new javax.swing.JTextField();
         labelStock = new javax.swing.JLabel();
         CBSupplier = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
+        BTnactualizar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableProduct = new javax.swing.JTable();
         txtID = new javax.swing.JTextField();
@@ -185,7 +188,7 @@ public class GestionView extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Frame 22ButtonUpdate.png"))); // NOI18N
+        BTnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Frame 22ButtonUpdate.png"))); // NOI18N
 
         tableProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -237,7 +240,7 @@ public class GestionView extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
+                                    .addComponent(BTnactualizar)
                                     .addGap(3, 3, 3)
                                     .addComponent(jLabel5))
                                 .addGroup(layout.createSequentialGroup()
@@ -280,7 +283,7 @@ public class GestionView extends javax.swing.JFrame {
                             .addComponent(CBSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(20, 20, 20)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
+                                .addComponent(BTnactualizar)
                                 .addComponent(jLabel5)))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(0, 14, Short.MAX_VALUE)))
@@ -362,10 +365,10 @@ public class GestionView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BTnactualizar;
     private javax.swing.JComboBox<String> CBSupplier;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
@@ -465,11 +468,13 @@ public class GestionView extends javax.swing.JFrame {
 
     private void setActiveForm() {
         if (action == ActionTypes.CREATE) {
-
+            CBSupplier.setEditable(true);
+            BTnactualizar.setEnabled(false);
         }
 
         if (action == ActionTypes.UPDATE) {
-
+            CBSupplier.setEditable(false);
+            BTnactualizar.setEnabled(true);
         }
     }
 

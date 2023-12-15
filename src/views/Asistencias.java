@@ -188,6 +188,7 @@ public class Asistencias extends javax.swing.JPanel {
         
         int id = (Integer) tableModel.getValueAt(tableStudent.getSelectedRow(), 0);
         Student studentFound = searchProduct(id);
+        
        
     }//GEN-LAST:event_ButtonConsultMousePressed
 
