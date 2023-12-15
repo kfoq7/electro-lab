@@ -4,10 +4,12 @@
  */
 package views;
 
+import controllers.StudentController;
 import java.util.ArrayList;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import models.Product;
 import models.Student;
 
 /**
@@ -17,8 +19,8 @@ import models.Student;
 public class Asistencias extends javax.swing.JPanel {
     
     DefaultTableModel tableModel;
-    
-    ArrayList<Student> studentsList = new ArrayList<>();
+    StudentController controllerS = new StudentController();
+    ArrayList<Student> studentsList;
     
     String[] header = {"CODIGO", "CARRERA", "APPELLIDO Y NOMBRE", "FECHA/HORA", "CICLO", "ASITENCIA"};
     
@@ -35,25 +37,31 @@ public class Asistencias extends javax.swing.JPanel {
             }
         }; 
         
-        Object[] rofila = {"12031023012", "Sitemas", "luis", "2000-12-1", "4", true};
+        studentsList = controllerS.getStudents();
         
-        tableModel.addRow(rofila);
+        for (Student student : studentsList) {
+            Object[] ros = {String.valueOf(student.getStudent_code()), student.getCareer(), student.getNames(), student.getDate().toString(), String.valueOf(student.getCycle()), false};
+            tableModel.addRow(ros);
+        }
         tableStudent.setModel(tableModel);
         
         
         txtSearch.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
+                System.out.println(txtSearch.getText());
                 filter();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
+                System.out.println(txtSearch.getText());
                 filter();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
+                System.out.println(txtSearch.getText());
                 filter();
             }
         });
@@ -177,7 +185,9 @@ public class Asistencias extends javax.swing.JPanel {
 
     private void ButtonConsultMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonConsultMousePressed
         // TODO add your handling code here:
-
+        
+        int id = (Integer) tableModel.getValueAt(tableStudent.getSelectedRow(), 0);
+        Student studentFound = searchProduct(id);
        
     }//GEN-LAST:event_ButtonConsultMousePressed
 
@@ -199,7 +209,18 @@ public class Asistencias extends javax.swing.JPanel {
                 filteredStudents.add(student);
             }
         }
+        
+        tableModel.setRowCount(0);
+        updateTable(filteredStudents);
     }
+    private void updateTable(ArrayList<Student> StudentList) {
+        for (Student student : StudentList) {
+            Object[] ros = {String.valueOf(student.getStudent_code()), student.getCareer(), student.getNames(), student.getDate().toString(), String.valueOf(student.getCycle()), false};
+            
+            tableModel.addRow(ros);
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ButtonConsult;
@@ -210,4 +231,13 @@ public class Asistencias extends javax.swing.JPanel {
     private javax.swing.JTable tableStudent;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+
+    private Student searchProduct(int id) {
+        for (Student student : studentsList) {
+            if (student.getStudent_code() == id) {
+                return student;
+            }
+        }
+        return null;
+    }
 }

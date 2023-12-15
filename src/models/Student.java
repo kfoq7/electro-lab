@@ -15,5 +15,6 @@ public class Student {
     private String career;
     private int cycle;
     private LocalDate date;
+    private boolean asistencia;
 
 }

@@ -24,7 +24,7 @@ public class InventoryPanel extends javax.swing.JPanel {
     private ArrayList<Product> products;
 
     User user = new User();
-//    GestionView gestionPanel = new GestionView(); 
+    GestionView gestionPanel = new GestionView(); 
 
 //    InventarioConrtoller controller;
     ProductController controller;
@@ -244,9 +244,9 @@ public class InventoryPanel extends javax.swing.JPanel {
 
         int id = (Integer) tableModel.getValueAt(tableInventory.getSelectedRow(), 0);
         Product productFound = searchProduct(id);
-//        gestionPanel.setDataField(productFound);
-//        gestionPanel.setVisible(true);
-//        gestionPanel.details(false);
+        gestionPanel.setDataField(productFound);
+        gestionPanel.setVisible(true);
+        gestionPanel.details(false);
     }//GEN-LAST:event_ButtonConsultMousePressed
 
 
